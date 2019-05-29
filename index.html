@@ -6,6 +6,8 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600|Ubuntu:400,700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<link rel="stylesheet" href="libraries/jquery.timepicker.min.css">
+	<link rel="stylesheet" href="libraries/datepicker.min.css">
 	<link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -15,164 +17,217 @@
 	<div class="container">
 		<!-- <h2 class="title">Phone survey</h2> -->
 		<div class="form-wrapper">
-			<ul class="nav nav-pills steps">
+			<ul class="nav nav-pills steps" id="form_tabs">
 			  <li class="nav-item">
-			    <a class="nav-link active" href="#">Start survey</a>
+			    <a class="nav-link" id="tab_start_survey" href="#">Start survey</a>
 			  </li>
 			  <li class="nav-item">
-			    <a class="nav-link disabled" href="#">Basic details</a>
+			    <a class="nav-link" id="tab_basic_details" href="#">Basic details</a>
 			  </li>
 			</ul>
 
-
-			<form>
+			<form action="javascript:void(0);" autocomplete="off" class="needs-validation" id="form_start_survey" novalidate>
 			  <div class="form-group">
 			    <label for="survey_short_name">Survey short name</label>
-			    <input type="text" class="form-control" id="survey_short_name">
+			    <input type="text" class="form-control" id="survey_short_name" required>
+			    <div class="invalid-feedback">
+	          Required field.
+	        </div>
 			  </div>
 			  <div class="form-group">
-			    <label for="survey_description">Survey description</label>
+			    <label for="survey_description">Survey description <span class="optional">optional</span></label>
 			    <input type="text" class="form-control" id="survey_description">
 			  </div>
 
-			  <div class="row group-two">
-			  	<div class="col-sm-2">
-			  		<div class="form-group">
-			  			<label for="num_questions">Number of questions</label>
-			  			<div class="count-input">
-			  				<div class="btn-circle">
-			  					<i class="fas fa-minus"></i>
-			  				</div>
-			  				<input type="text" class="form-control" id="num_questions" placeholder="0" maxlength="3">
-			  				<div class="btn-circle">
-			  					<i class="fas fa-plus"></i>
-			  				</div>
-			  			</div>
-			  		</div>
-			  		<div class="form-group">
-			  			<label for="response_goal">Survey response goal</label>
-			  			<div class="count-input">
-			  				<div class="btn-circle">
-			  					<i class="fas fa-minus"></i>
-			  				</div>
-			  				<input type="text" class="form-control" id="response_goal" placeholder="0" maxlength="3">
-			  				<div class="btn-circle">
-			  					<i class="fas fa-plus"></i>
-			  				</div>
-			  			</div>
-			  		</div>
-			  		<div class="form-group">
-			  			<div class="clearfix">
-			  				<div class="info-tooltip float-right">
-				  				<i class="fas fa-question"></i>
+				<div class="group-two">
+					<div class="row row-one">
+						<div class="col-sm-2">
+							<div class="form-group">
+				  			<label for="num_questions">Number of questions</label>
+				  			<div class="count-input">
+				  				<div class="btn-circle" onclick="questionsCount('substract')">
+				  					<i class="fas fa-minus"></i>
+				  				</div>
+				  				<input type="text" class="form-control" id="num_questions" placeholder="1" maxlength="3" value="1">
+				  				<div class="btn-circle" onclick="questionsCount('sum')">
+				  					<i class="fas fa-plus"></i>
+				  				</div>
 				  			</div>
-				  			<label for="skip_logic float-left">Use survey skip logic?</label>
-			  			</div>
-			  			<div class="yes-no-input">
-			  				<div class="btn-yes-no left selected">
-			  					Yes
-			  				</div>
-			  				<div class="btn-yes-no right">
-			  					No
-			  				</div>
-			  			</div>
-			  		</div>
-			  		<div class="form-group">
-			  			<div class="clearfix">
-			  				<div class="info-tooltip float-right">
-				  				<i class="fas fa-question"></i>
+				  		</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group">
+				  			<label for="start_date">Survey start date</label>
+					  		<div class="input-group mb-3">
+								  <input type="text" class="form-control" id="start_date" aria-describedby="start_date_input" data-language='en' required>
+								  <div class="input-group-append">
+								    <span class="input-group-text" id="start_date_input"><i class="far fa-calendar-alt"></i></span>
+								  </div>
+								  <div class="invalid-feedback">
+					          Required field.
+					        </div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group">
+				  			<label for="start_time">Survey start time</label>
+					  		<div class="input-group mb-3">
+								  <input type="text" class="form-control" id="start_time" aria-describedby="start_time_input" required>
+								  <div class="input-group-append">
+								    <span class="input-group-text" id="start_time_input"><i class="far fa-clock"></i></span>
+								  </div>
+								  <div class="invalid-feedback">
+					          Required field.
+					        </div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="form-group">
+						    <label for="formControlRange">Timeout: <span id="timeoutDisplay">30</span> seconds (<span id="timeoutRingsDisplay">5</span> rings)</label>
+						    <input type="range" class="form-control-range" id="timeout" min="12" max="120" value="30" step="6" onchange="updateTimeoutDisplay(event)">
+				  		</div>
+						</div>
+					</div>
+
+					<div class="row row-two">
+						<div class="col-sm-2">
+							<div class="form-group">
+				  			<label for="response_goal">Survey response goal</label>
+				  			<div class="count-input">
+				  				<div class="btn-circle" onclick="responseGoalCount('substract')">
+				  					<i class="fas fa-minus"></i>
+				  				</div>
+				  				<input type="text" class="form-control" id="response_goal" placeholder="0" maxlength="3" value="0">
+				  				<div class="btn-circle" onclick="responseGoalCount('sum')">
+				  					<i class="fas fa-plus"></i>
+				  				</div>
 				  			</div>
-				  			<label for="skip_logic float-left">Enable AMD?</label>
-			  			</div>
-			  			<div class="yes-no-input">
-			  				<div class="btn-yes-no left">
-			  					Yes
-			  				</div>
-			  				<div class="btn-yes-no right selected">
-			  					No
-			  				</div>
-			  			</div>
-			  		</div>
-			  	</div>
-			  	<div class="col-sm-3">
-			  		<div class="form-group">
-			  			<label for="start_date">Survey start date</label>
-				  		<div class="input-group mb-3">
-							  <input type="text" class="form-control" id="start_date" aria-describedby="start_date_input">
-							  <div class="input-group-append">
-							    <span class="input-group-text" id="start_date_input"><i class="far fa-calendar-alt"></i></span>
-							  </div>
+				  		</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group">
+				  			<label for="end_date">Survey end date</label>
+					  		<div class="input-group mb-3">
+								  <input type="text" class="form-control" id="end_date" aria-describedby="end_date_input" data-language='en' required>
+								  <div class="input-group-append">
+								    <span class="input-group-text" id="end_date_input"><i class="far fa-calendar-alt"></i></span>
+								  </div>
+								  <div class="invalid-feedback">
+					          Required field.
+					        </div>
+								</div>
 							</div>
 						</div>
-						<div class="form-group">
-			  			<label for="end_date">Survey end date</label>
-				  		<div class="input-group mb-3">
-							  <input type="text" class="form-control" id="end_date" aria-describedby="end_date_input">
-							  <div class="input-group-append">
-							    <span class="input-group-text" id="end_date_input"><i class="far fa-calendar-alt"></i></span>
-							  </div>
+						<div class="col-sm-3">
+							<div class="form-group">
+				  			<label for="end_time">Survey end time</label>
+					  		<div class="input-group mb-3">
+								  <input type="text" class="form-control" id="end_time" aria-describedby="end_time_input" required>
+								  <div class="input-group-append">
+								    <span class="input-group-text" id="end_time_input"><i class="far fa-clock"></i></span>
+								  </div>
+								  <div class="invalid-feedback">
+					          Required field.
+					        </div>
+								</div>
 							</div>
 						</div>
-						<div class="form-group">
-			  			<label for="create_date">Survey created</label>
-				  		<div class="input-group mb-3">
-							  <input type="text" class="form-control" id="create_date" aria-describedby="create_date_input">
-							  <div class="input-group-append">
-							    <span class="input-group-text" id="create_date_input"><i class="far fa-calendar-alt"></i></span>
-							  </div>
+						<div class="col-sm-4">
+							<div class="form-group">
+						    <label for="formControlRange">Audio volume: <span id="volumeDisplay">25</span>%</label>
+						    <input type="range" class="form-control-range" id="formControlRange" min="0" max="200" value="25" step="5" onchange="updateVolumeDisplay(event)">
+				  		</div>
+						</div>
+					</div>
+
+					<div class="row row-three">
+						<div class="col-sm-2">
+							<div class="form-group">
+				  			<div class="clearfix">
+				  				<div class="info-tooltip float-right">
+					  				<i class="fas fa-question"></i>
+					  			</div>
+					  			<label for="skip_logic float-left">Use survey skip logic?</label>
+				  			</div>
+				  			<div class="yes-no-input">
+				  				<div class="btn-yes-no left" id="skip_logic_yes" onclick="toggleSkipLogic(event)">
+				  					Yes
+				  				</div>
+				  				<div class="btn-yes-no right selected" id="skip_logic_no" onclick="toggleSkipLogic(event)">
+				  					No
+				  				</div>
+				  			</div>
+				  		</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group">
+				  			<label for="create_date">Survey created</label>
+					  		<div class="input-group mb-3">
+								  <input type="text" class="form-control" id="create_date" aria-describedby="create_date_input" data-language='en' required>
+								  <div class="input-group-append">
+								    <span class="input-group-text" id="create_date_input"><i class="far fa-calendar-alt"></i></span>
+								  </div>
+								  <div class="invalid-feedback">
+					          Required field.
+					        </div>
+								</div>
 							</div>
 						</div>
-			  	</div>
-			  	<div class="col-sm-3">
-
-		  			<div class="form-group">
-		  			<label for="start_time">Survey start time</label>
-			  		<div class="input-group mb-3">
-						  <input type="text" class="form-control" id="start_time" aria-describedby="start_time_input">
-						  <div class="input-group-append">
-						    <span class="input-group-text" id="start_time_input"><i class="far fa-clock"></i></span>
-						  </div>
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="trunk">Trunk</label>
+								<select id="trunk" class="form-control" onchange="updateChannels(event)" required>
+									<option>Choose</option>
+									<option value="Trunk name">Trunk name</option>
+						 		</select>
+						 		<div class="invalid-feedback">
+					          Required field.
+					        </div>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="form-group">
+						    <label for="formControlRange">Channels: <span id="channelsDisplay">1</span></label>
+						    <input type="range" class="form-control-range" id="channels" min="1" max="100" value="1">
+				  		</div>
 						</div>
 					</div>
-					<div class="form-group">
-		  			<label for="end_time">Survey end time</label>
-			  		<div class="input-group mb-3">
-						  <input type="text" class="form-control" id="end_time" aria-describedby="end_time_input">
-						  <div class="input-group-append">
-						    <span class="input-group-text" id="end_time_input"><i class="far fa-clock"></i></span>
-						  </div>
+
+					<div class="row row-four">
+						<div class="col-sm-2">
+							<div class="form-group">
+				  			<div class="clearfix">
+				  				<div class="info-tooltip float-right">
+					  				<i class="fas fa-question"></i>
+					  			</div>
+					  			<label for="skip_logic float-left">Enable AMD?</label>
+				  			</div>
+				  			<div class="yes-no-input">
+				  				<div class="btn-yes-no left selected" id="enable_amd_yes" onclick="toggleEnableAMD(event)">
+				  					Yes
+				  				</div>
+				  				<div class="btn-yes-no right" id="enable_amd_no" onclick="toggleEnableAMD(event)">
+				  					No
+				  				</div>
+				  			</div>
+				  		</div>
 						</div>
 					</div>
-					<div class="form-group">
-						<label for="trunk">Trunk</label>
-						<select id="trunk" class="form-control">
-							<option selected>Choose</option>
-				 		</select>
-					</div>
-
-			  	</div>
-			  	<div class="col-sm-4">
-			  		<div class="form-group">
-					    <label for="formControlRange">Timeout: 30 seconds (5 rings)</label>
-					    <input type="range" class="form-control-range" id="formControlRange">
-			  		</div>
-			  		<div class="form-group">
-					    <label for="formControlRange">Channels: 9</label>
-					    <input type="range" class="form-control-range" id="formControlRange">
-			  		</div>
-			  		<div class="form-group">
-					    <label for="formControlRange">Audio volume: 25%</label>
-					    <input type="range" class="form-control-range" id="formControlRange">
-			  		</div>
-			  	</div>
-			  </div>
-
-
-				<div class="next-wrapper">
-					<button type="submit" class="btn btn-primary">Generate survey</button>
 				</div>
-			  
+				<div class="next-wrapper">
+					<button type="submit" class="btn btn-primary" id="btn_generate_survey" onclick="generateSurvey()">Generate survey</button>
+				</div>
 			</form>
+
+
+
+
+			<form action="javascript:void(0);" autocomplete="off" class="needs-validation" id="form_basic_details" novalidate>
+				basic details
+			</form>
+
 		</div>
 	</div>
 </div>
@@ -181,5 +236,9 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	<script src="libraries/jquery.timepicker.min.js"></script>
+	<script src="libraries/datepicker.min.js"></script>
+	<script src="libraries/datepicker.en.js"></script>
+	<script src="app.js"></script>
 </body>
 </html>

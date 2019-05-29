@@ -17,6 +17,13 @@ form {
 	padding: 2rem;
 }
 
+.show {
+	display: block;
+}
+.hide {
+	display: none;
+}
+
 /*.nav.steps {
 	margin-bottom: 20px;
 }*/
@@ -46,7 +53,7 @@ form {
 .form-group {
 	margin-bottom: 2rem;
 }
-.input-group-text {
+.input-text {
 	padding: .5rem .75rem;
   font-size: 1rem;
   line-height: 1;
@@ -102,6 +109,11 @@ textarea.form-control:focus {
 label {
 	font-size: .8rem;
 	font-weight: 600;
+}
+label span.optional {
+	font-style: italic;
+	padding-left: 10px;
+	font-weight: 400;
 }
 input[type=range] {
   -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
@@ -288,3 +300,31 @@ input[type=range]:focus::-ms-fill-upper {
 	color: #fff;
 }
 
+
+
+.custom-select.is-valid, 
+.form-control.is-valid, 
+.was-validated .custom-select:valid, 
+.was-validated .form-control:valid {
+  border-color: #e0e0e0;
+}
+.custom-select.is-valid:focus,
+.was-validated .custom-select:valid:focus,
+.form-control.is-valid:focus, 
+.was-validated .form-control:valid:focus {
+	border-color: #bdbdbd;
+}
+
+.custom-select.is-invalid, .form-control.is-invalid, .was-validated .custom-select:invalid, .was-validated .form-control:invalid {
+  border-color: #e0e0e0;
+  border-left: 6px solid #f44336;
+}
+.custom-select.is-invalid:focus, .form-control.is-invalid:focus, .was-validated .custom-select:invalid:focus, .was-validated .form-control:invalid:focus {
+  border-color: #bdbdbd;
+  border-left: 2px solid #bdbdbd;
+}
+
+.invalid-feedback {
+	font-size: .8rem;
+	color: #f44336;
+}
