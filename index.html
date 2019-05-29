@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Phone survey</title>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600|Ubuntu:400,700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+
+<div class="container-fluid">
+	<div class="container">
+		<!-- <h2 class="title">Phone survey</h2> -->
+		<div class="form-wrapper">
+			<ul class="nav nav-pills steps">
+			  <li class="nav-item">
+			    <a class="nav-link active" href="#">Start survey</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link disabled" href="#">Basic details</a>
+			  </li>
+			</ul>
+
+
+			<form>
+			  <div class="form-group">
+			    <label for="survey_short_name">Survey short name</label>
+			    <input type="text" class="form-control" id="survey_short_name">
+			  </div>
+			  <div class="form-group">
+			    <label for="survey_description">Survey description</label>
+			    <input type="text" class="form-control" id="survey_description">
+			  </div>
+
+			  <div class="row group-two">
+			  	<div class="col-sm-2">
+			  		<div class="form-group">
+			  			<label for="num_questions">Number of questions</label>
+			  			<div class="count-input">
+			  				<div class="btn-circle">
+			  					<i class="fas fa-minus"></i>
+			  				</div>
+			  				<input type="text" class="form-control" id="num_questions" placeholder="0" maxlength="3">
+			  				<div class="btn-circle">
+			  					<i class="fas fa-plus"></i>
+			  				</div>
+			  			</div>
+			  		</div>
+			  		<div class="form-group">
+			  			<label for="response_goal">Survey response goal</label>
+			  			<div class="count-input">
+			  				<div class="btn-circle">
+			  					<i class="fas fa-minus"></i>
+			  				</div>
+			  				<input type="text" class="form-control" id="response_goal" placeholder="0" maxlength="3">
+			  				<div class="btn-circle">
+			  					<i class="fas fa-plus"></i>
+			  				</div>
+			  			</div>
+			  		</div>
+			  		<div class="form-group">
+			  			<div class="clearfix">
+			  				<div class="info-tooltip float-right">
+				  				<i class="fas fa-question"></i>
+				  			</div>
+				  			<label for="skip_logic float-left">Use survey skip logic?</label>
+			  			</div>
+			  			<div class="yes-no-input">
+			  				<div class="btn-yes-no left selected">
+			  					Yes
+			  				</div>
+			  				<div class="btn-yes-no right">
+			  					No
+			  				</div>
+			  			</div>
+			  		</div>
+			  		<div class="form-group">
+			  			<div class="clearfix">
+			  				<div class="info-tooltip float-right">
+				  				<i class="fas fa-question"></i>
+				  			</div>
+				  			<label for="skip_logic float-left">Enable AMD?</label>
+			  			</div>
+			  			<div class="yes-no-input">
+			  				<div class="btn-yes-no left">
+			  					Yes
+			  				</div>
+			  				<div class="btn-yes-no right selected">
+			  					No
+			  				</div>
+			  			</div>
+			  		</div>
+			  	</div>
+			  	<div class="col-sm-3">
+			  		<div class="form-group">
+			  			<label for="start_date">Survey start date</label>
+				  		<div class="input-group mb-3">
+							  <input type="text" class="form-control" id="start_date" aria-describedby="start_date_input">
+							  <div class="input-group-append">
+							    <span class="input-group-text" id="start_date_input"><i class="far fa-calendar-alt"></i></span>
+							  </div>
+							</div>
+						</div>
+						<div class="form-group">
+			  			<label for="end_date">Survey end date</label>
+				  		<div class="input-group mb-3">
+							  <input type="text" class="form-control" id="end_date" aria-describedby="end_date_input">
+							  <div class="input-group-append">
+							    <span class="input-group-text" id="end_date_input"><i class="far fa-calendar-alt"></i></span>
+							  </div>
+							</div>
+						</div>
+						<div class="form-group">
+			  			<label for="create_date">Survey created</label>
+				  		<div class="input-group mb-3">
+							  <input type="text" class="form-control" id="create_date" aria-describedby="create_date_input">
+							  <div class="input-group-append">
+							    <span class="input-group-text" id="create_date_input"><i class="far fa-calendar-alt"></i></span>
+							  </div>
+							</div>
+						</div>
+			  	</div>
+			  	<div class="col-sm-3">
+			  		<div class="form-group">
+			  			<div class="form-group">
+			  			<label for="start_time">Survey start time</label>
+				  		<div class="input-group mb-3">
+							  <input type="text" class="form-control" id="start_time" aria-describedby="start_time_input">
+							  <div class="input-group-append">
+							    <span class="input-group-text" id="start_time_input"><i class="far fa-clock"></i></span>
+							  </div>
+							</div>
+						</div>
+						<div class="form-group">
+			  			<label for="end_time">Survey end time</label>
+				  		<div class="input-group mb-3">
+							  <input type="text" class="form-control" id="end_time" aria-describedby="end_time_input">
+							  <div class="input-group-append">
+							    <span class="input-group-text" id="end_time_input"><i class="far fa-clock"></i></span>
+							  </div>
+							</div>
+						</div>
+			  		</div>
+			  	</div>
+			  	<div class="col-sm-4">
+			  		<div class="form-group">
+					    <label for="formControlRange">Example Range input</label>
+					    <input type="range" class="form-control-range" id="formControlRange">
+			  		</div>
+			  	</div>
+			  </div>
+
+
+				<div class="next-wrapper">
+					<button type="submit" class="btn btn-primary">Generate survey</button>
+				</div>
+			  
+			</form>
+		</div>
+	</div>
+</div>
+
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>
