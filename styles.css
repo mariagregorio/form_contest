@@ -1,5 +1,5 @@
 body {
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	background: #f5f5f5;
 	color: #424242;
 }
@@ -9,12 +9,14 @@ h1, h2, h3, h4, h5 {
 }
 
 p {
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'Roboto', sans-serif;
 }
 
 form {
 	background: #fff;
 	padding: 2rem;
+	box-shadow: 0px 3px 4px rgba(0,0,0,.2);
+	margin-bottom: 40px;
 }
 
 .show {
@@ -44,7 +46,7 @@ form {
 }
 
 .nav.steps .nav-item .nav-link.active {
-	font-weight: 600;
+	font-weight: 500;
 	border-bottom: 3px solid #039be5;
 }
 .nav.steps .nav-item .nav-link.disabled {
@@ -82,7 +84,18 @@ select.form-control {
 	box-shadow:none !important;
 	font-size: .9rem;
 }
-
+.input-group-append {
+	background: #e0e0e0;
+	border: 2px solid #e0e0e0;
+	border-radius: 0 .4rem .4rem 0;
+	cursor: pointer;
+}
+.input-group-text {
+  color: #424242;
+  background-color: #e0e0e0;
+  border: 0;
+  border-radius: 0;
+}
 
 input.form-control:focus {
 	border: 2px solid #bdbdbd;
@@ -108,7 +121,7 @@ textarea.form-control:focus {
 }
 label {
 	font-size: .8rem;
-	font-weight: 600;
+	font-weight: 500;
 }
 label span.optional {
 	font-style: italic;
@@ -215,7 +228,7 @@ input[type=range]:focus::-ms-fill-upper {
     padding: .7rem 1.25rem;
     font-size: 1rem;
     line-height: 1.5;
-    border-radius: .4rem;
+    border-radius: 100px;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 .group-two {
@@ -224,7 +237,7 @@ input[type=range]:focus::-ms-fill-upper {
 .count-input {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-around;
+	justify-content: center;
 	min-height: 41px;
 	align-items: center;
 }
@@ -245,21 +258,20 @@ input[type=range]:focus::-ms-fill-upper {
 
 .count-input .btn-circle {
 	display: block;
-	color: #fff;
-  background-color: #29b6f6;
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
+	color: #29b6f6;
+  width: 30px;
+  height: 30px;
+  border-radius: .4rem;
   position: relative;
   cursor: pointer;
   transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 .count-input .btn-circle:hover {
-    color: #fff;
-    background-color: #039be5;
+  color: #039be5;
 }
 .count-input .btn-circle i {
 	position: absolute;
+	font-size: 13px;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
@@ -274,26 +286,26 @@ input[type=range]:focus::-ms-fill-upper {
 	display: block;
 	color: #777;
   background-color: #eee;
-  border-radius: .4rem;
   text-align: center;
   padding: .4rem .6rem;
   cursor: pointer;
   min-width:60px;
+  font-size: .9rem;
 }
 .btn-yes-no:hover {
 	background: #e0e0e0;
 	color: #424242;
 }
 .btn-yes-no.left {
-	border-radius: .4rem 0 0 .4rem;
+	border-radius: 100px 0 0 100px;
 }
 .btn-yes-no.right {
-	border-radius: .0rem .4rem .4rem 0;
+	border-radius: .0rem 100px 100px 0;
 }
 .btn-yes-no.selected {
 	background-color: #29b6f6;
 	color: #fff;
-	font-weight: 600;
+	font-weight: 500;
 }
 .btn-yes-no.selected:hover {
 	background-color: #29b6f6;
@@ -327,4 +339,56 @@ input[type=range]:focus::-ms-fill-upper {
 .invalid-feedback {
 	font-size: .8rem;
 	color: #f44336;
+}
+
+.file-drop-box {
+	position: relative;
+	background: #fff;
+	border: 2px dashed #e0e0e0;
+	border-radius: .4rem;
+	padding: .5rem .75rem;
+	outline: none;
+	box-shadow:none !important;
+	color: #757575;
+	transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+	margin-bottom: 20px;
+}
+ul.list-group {
+	font-size: .9rem;
+	border: 0px;
+}
+ul.list-group li {
+	border:0px;
+	border-radius: .4rem;
+	background: #f2f2f2;
+	margin-bottom: 5px;
+}
+.fake-button {
+	text-align: center;
+	z-index:0;
+}
+.fake-button i {
+	color: #bdbdbd;
+	font-size: 2rem;	
+}
+.fake-button h5 {
+	font-size: 1rem;
+	color: #bdbdbd;
+	font-weight: 500;
+}
+.file-drop-box:hover {
+	border: 2px dashed #bdbdbd;
+}
+.file-input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  opacity: 0;
+  
+}
+.file-input:focus {
+  outline: none;
 }

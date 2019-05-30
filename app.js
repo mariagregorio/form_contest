@@ -221,10 +221,28 @@ $( document ).ready(function() {
   let tab_start_survey = document.getElementById('tab_start_survey'); 
   let tab_basic_details = document.getElementById('tab_basic_details'); 
 
+// changed this for development purpouses
   form_start_survey.classList.add('show');
   form_basic_details.classList.add('hide');
 
 
   tab_start_survey.classList.add('active');
   tab_basic_details.classList.add('disabled');
+
 });
+
+
+
+function updateFilesList() {
+	// file upload input logic
+  let input = document.getElementById('file_upload_input');
+	let list = document.getElementById('files_list');
+	let i;
+	for (i=0; i < input.files.length; i++) {
+		//add to list
+		let li = document.createElement('li');
+		li.classList.add('list-group-item');
+		li.innerHTML = input.files[i].name;
+		list.append(li);
+	}
+}
