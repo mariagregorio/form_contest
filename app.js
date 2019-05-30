@@ -222,8 +222,8 @@ $( document ).ready(function() {
   let tab_basic_details = document.getElementById('tab_basic_details'); 
 
 // changed this for development purpouses
-  form_start_survey.classList.add('show');
-  form_basic_details.classList.add('hide');
+  form_start_survey.classList.add('hide');
+  form_basic_details.classList.add('show');
 
 
   tab_start_survey.classList.add('active');
@@ -242,7 +242,9 @@ function updateFilesList() {
 		//add to list
 		let li = document.createElement('li');
 		li.classList.add('list-group-item');
-		li.innerHTML = input.files[i].name;
+		li.innerHTML = '<div class="file" id="file_' + i + '"><p>' + input.files[i].name +
+		 '</p><p class="size">' + input.files[i].size + ' bytes</p></div><div class="delete-file" id="del_' + i +
+		 '"><i class="fas fa-trash-alt"></i></div>';
 		list.append(li);
 	}
 }
