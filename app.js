@@ -346,9 +346,9 @@ function goToQuestion(questionNum) {
 	let row = document.createElement('div');
 	row.classList.add('row');
 	let col4 = document.createElement('div');
-	let col6 = document.createElement('div');
+	let col8 = document.createElement('div');
 	col4.classList.add('col-sm-4');
-	col6.classList.add('col-sm-6');
+	col8.classList.add('col-sm-8');
 
 	let form_group_1 = document.createElement('div');
 	let form_group_2 = document.createElement('div');
@@ -360,26 +360,66 @@ function goToQuestion(questionNum) {
 		audio_options_list_HTML += '<option value="'+ uploadedFiles[audio_n] +'">'+ uploadedFiles[audio_n] +'</option>';
 	}
 
-	form_group_1.innerHTML = '<label for="question_audio">Question audio</label><select id="question_audio" class="form-control">'+ audio_options_list_HTML + '</select>';
-	form_group_2.innerHTML = '<label for="question_prompt">Question prompt</label><input type="text" id="question_prompt" class="form-control">';
-	form_group_3.innerHTML = '<label for="question_label">Question label</label><input type="text" id="question_label" class="form-control">';
+	form_group_1.innerHTML = '<div class="form-group"><label for="question_audio">Question audio</label><select id="question_audio" class="form-control">'+ audio_options_list_HTML + '</select></div>';
+	form_group_2.innerHTML = '<div class="form-group"><label for="question_prompt">Question prompt</label><input type="text" id="question_prompt" class="form-control"></div>';
+	form_group_3.innerHTML = '<div class="form-group"><label for="question_label">Question label</label><input type="text" id="question_label" class="form-control"></div>';
 
 	col4.append(form_group_1);
 	col4.append(form_group_2);
 	col4.append(form_group_3);
 
+	// if skip logic is on, show DTMF form
+	if (initial_data.is_linear == true) {
+		let dtmf_row = document.createElement('div');
+		dtmf_row.classList.add('dtmf-row', 'row');
+		dtmf_row.innerHTML = '';
+		// create dmtf cells and append to row
+		for (let i=0; i < 12; i++) {
+			dtmf_row.innerHTML += '<div class="col-4"><div class="card dtmf-cell"><div class="card-body"><div class="clearfix"><div class="float-left"><label><input type="checkbox" class="check-custom" onclick="updateDTMFStatus(event)"><span class="check-toggle"><span class="check-mark"></span></span></label></div><p class="float-right">DTMF 1</p></div></div></div></div>'
+		}
+		col8.append(dtmf_row);
+	}
+
 	row.append(col4);
-	row.append(col6);
+	row.append(col8);
 
 	form.append(row);
 
-	let next_btn = document.createElement('div');
-	// next_btn.classList.add('next-wrapper');
-	// next_btn.innerHTML = '<div class="next-wrapper"><button type="submit" class="btn btn-primary" id="btn_next_step' + (questionNum + 1) + '" onclick="goToQuestion(' + (questionNum + 2) + ')">Next step</button></div>';
+	// check for last question and add last step button
+	if (questionNum != initial_data.project_questions) {
+		let next_btn = document.createElement('div');
+		next_btn.classList.add('next-wrapper');
+		next_btn.innerHTML = '<div class="next-wrapper"><button type="submit" class="btn btn-primary" id="btn_next_step' + (questionNum) + '" onclick="goToQuestion(' + (questionNum + 1) + ')">Next step</button></div>';
+
+		form.append(next_btn);
+	} else {
+		let finish_btn = document.createElement('div');
+		finish_btn.classList.add('next-wrapper');
+		finish_btn.innerHTML = '<div class="next-wrapper"><button type="submit" class="btn btn-primary" id="finish_btn" onclick="finish()">Preview and save</button></div>';
+
+		form.append(finish_btn);
+	}
 }
-// TO-DO
-// check for last question and add final step
 
 
-//REMEMBER
-//if skip logic is true, show the dtmf thing
+
+function finish() {
+	let last_question_form = document.getElementById('question_form_' + initial_data.project_questions);
+	last_question_form.classList.add('hide');
+
+	let question_tab = document.getElementById('tab_question_' + initial_data.project_questions);
+	question_tab.classList.add('disabled');
+	question_tab.classList.remove('active');
+
+	let preview = document.getElementById('preview');
+	preview.classList.remove('hide');
+}
+
+
+
+
+
+function updateDTMFStatus(event) {
+	let el = event.target;
+	console.log(el.checked);
+}
