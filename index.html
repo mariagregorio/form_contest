@@ -16,7 +16,7 @@
 
 <div class="container-fluid">
 	<div class="container">
-		<!-- <h2 class="title">Phone survey</h2> -->
+		<h2 class="title">Phone survey</h2>
 		<div class="form-wrapper">
 			<ul class="nav nav-pills steps" id="form_tabs">
 			  <li class="nav-item">
@@ -275,10 +275,152 @@
 
 
 			<div id="question_forms_wrapper"></div>
-			<div id="preview" class="hide">
-				<h3>Preview</h3>
-			</div>
 
+			<div id="preview" class="preview hide">
+				<h3>Preview</h3>
+				<h5>Initial data</h5>
+				<div class="row">
+					<div class="col-sm-3">
+						<p class="subtitle">Survey ID</p>
+						<p class="desc">Whatever</p>
+					</div>
+					<div class="col-sm-3">
+						<p class="subtitle">Survey short name</p>
+						<p class="desc">Whatever</p>
+					</div>
+					<div class="col-sm-6">
+						<p class="subtitle">Survey description</p>
+						<p class="desc">Whatever Whatever Whatever Whatever Whatever Whatever.</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+						<p class="subtitle">Number of questions</p>
+						<p class="desc">5</p>
+					</div>
+					<div class="col-sm-3">
+						<p class="subtitle">Survey response goal</p>
+						<p class="desc">50</p>
+					</div>
+					<div class="col-sm-3">
+						<p class="subtitle">Audio volume</p>
+						<p class="desc">500</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+						<p class="subtitle">Survey created</p>
+						<p class="desc">7/1/2019</p>
+					</div>
+					<div class="col-sm-3">
+						<p class="subtitle">Survey start date</p>
+						<p class="desc">7/1/2019</p>
+					</div>
+					<div class="col-sm-3">
+						<p class="subtitle">Survey end date</p>
+						<p class="desc">9/1/2019</p>
+					</div>
+					<div class="col-sm-3">
+						<p class="subtitle">Survey start-end time</p>
+						<p class="desc">00:30 - 03:20</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+						<p class="subtitle">Use survey skip logic?</p>
+						<p class="desc">Yes</p>
+					</div>
+					<div class="col-sm-3">
+						<p class="subtitle">Enable AMD?</p>
+						<p class="desc">No</p>
+					</div>
+					<div class="col-sm-3">
+						<p class="subtitle">Timeout</p>
+						<p class="desc">20</p>
+					</div>
+					<div class="col-sm-3">
+						<p class="subtitle">Channels</p>
+						<p class="desc">9</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+						<p class="subtitle">Trunk</p>
+						<p class="desc">73578</p>
+					</div>
+				</div>
+
+				<h5>Basic details</h5>
+				<div class="row">
+					<div class="col-sm-3">
+						<p class="subtitle">Response tracking question</p>
+						<p class="desc">2</p>
+					</div>
+					<div class="col-sm-3">
+						<p class="subtitle">Intro audio file</p>
+						<p class="desc"><i class="far fa-file-audio"></i> intro_surv.wav</p>
+					</div>
+					<div class="col-sm-3">
+						<p class="subtitle">Hangup audio file</p>
+						<p class="desc"><i class="far fa-file-audio"></i> hangup_audio.wav</p>
+					</div>
+				</div>
+
+				<h5>Questions</h5>
+				<table class="table">
+				  <thead>
+				    <tr>
+				      <th scope="col">N</th>
+				      <th scope="col">Question prompt</th>
+				      <th scope="col">Question audio file</th>
+				      <th scope="col">Question label</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr>
+				      <th scope="row">1</th>
+				      <td>What's your name?</td>
+				      <td><i class="far fa-file-audio"></i> some_audio_file.wav</td>
+				      <td>Name</td>
+				    </tr>
+				    <tr class="dtmf-tr">
+				    	<td></td>
+				    	<td colspan="3">
+				    		<table class="table-borderless">
+				    			<tr>
+				    				<td>DTMF 1</td>
+				    				<td>Whatvevr</td>
+				    				<td>Go to Question 4</td>
+				    			</tr>
+				    			<tr>
+				    				<td>DTMF 0</td>
+				    				<td>Somethin'</td>
+				    				<td>Go to Question 2</td>
+				    			</tr>
+				    			<tr>
+				    				<td>DTMF 5</td>
+				    				<td>Somethin' else</td>
+				    				<td>Go to Question 5</td>
+				    			</tr>
+
+				    		</table>
+				    	</td>
+				    </tr>
+				    <tr>
+				      <th scope="row">2</th>
+				      <td>What's your age?</td>
+				      <td><i class="far fa-file-audio"></i> some_audio_file.wav</td>
+				      <td>Age</td>
+				    </tr>
+				    <tr>
+				      <th scope="row">3</th>
+				      <td>Where do you live?</td>
+				      <td><i class="far fa-file-audio"></i> some_audio_file.wav</td>
+				      <td>Address</td>
+				    </tr>
+				  </tbody>
+				</table>
+			</div>
 			
 		</div>
 	</div>

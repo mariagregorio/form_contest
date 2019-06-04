@@ -36,7 +36,9 @@ form {
 .hide {
 	display: none;
 }
-
+hr {
+  border-top: 1px solid #b0bec5;
+}
 /*.nav.steps {
 	margin-bottom: 20px;
 }*/
@@ -519,3 +521,58 @@ input[type='checkbox'].check-custom:checked ~ .check-toggle .check-mark {
 	background: #455a64;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+.preview {
+	background: #fff;
+	padding: 2rem;
+	box-shadow: 0px 3px 3px rgba(0,0,0,.2);
+	margin-bottom: 40px;
+}
+.preview h5 {
+	margin-top: 1rem;
+}
+
+p.subtitle {
+	font-size: .85rem;
+	margin-bottom: 0;
+	font-weight: 500;
+}
+p.desc {
+	font-size: 1rem;
+	margin-bottom: .75rem;
+}
+
+.table {
+	font-size: .9rem;
+}
+
+.table thead tr th {
+	font-weight: 500;
+	font-size: .85rem;
+}
+.table tbody tr th {
+	font-weight: 500;
+	font-size: .85rem;
+}
+
+.table .dtmf-tr {
+	font-size: .8rem;
+}
+.table .dtmf-tr table {
+	width: 100%;
+}
+.table .dtmf-tr table tr td {
+	padding: .5rem 0;
+}

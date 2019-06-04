@@ -108,13 +108,6 @@ function updateChannels(event) {
 
 
 
-
-
-
-
-
-
-
 // START SURVEY SUBMIT
 function generateSurvey() {
 	let project_name = document.getElementById('survey_short_name').value;
@@ -184,12 +177,8 @@ function generateSurvey() {
   }
   form_start_survey.classList.add('was-validated');
 
-
   console.log(initial_data);
 }
-
-
-
 
 
 
@@ -446,7 +435,7 @@ function saveQuestion(num) {
 			let dtmf_check = document.getElementById('dtmf_check_' + num + '_' + (i+1));
 			let dtmf_text = document.getElementById('dtmf_text_' + num + '_' + (i+1));
 			let dtmf_select = document.getElementById('dtmf_select_' + num + '_' + (i+1));
-			
+
 			if (dtmf_text != null && dtmf_select != null) {
 				dtmf_values = [dtmf_check.checked, dtmf_text.value, dtmf_select.value];
 			} else if (dtmf_text != null && dtmf_select == null) {
