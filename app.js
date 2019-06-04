@@ -15,7 +15,18 @@ let initial_data = {
 	'project_channels': 1,
 	'project_volume': 0.25,
 	'project_user': null,
-}
+};
+
+let basic_details = {
+	'base_project_id': 'AR0001',
+	'response_tracking_question': null,
+	'intro_audio_original': null,
+	'hangup_audio_original': null
+};
+
+let questions = [];
+
+let questions_dtmf = [];
 
 
 function toggleSkipLogic(event) {
@@ -172,6 +183,9 @@ function generateSurvey() {
   	tab_basic_details.classList.remove('disabled');
   }
   form_start_survey.classList.add('was-validated');
+
+
+  console.log(initial_data);
 }
 
 
@@ -308,6 +322,19 @@ function updateIntroHangupAudioSelect() {
 }
 
 
+function saveBasicDetails() {
+	let response_tracking = document.getElementById('response_tracking');
+	let intro_audio = document.getElementById('intro_audio');
+	let hangup_audio = document.getElementById('hangup_audio');
+
+	basic_details.response_tracking_question = response_tracking.value;
+	basic_details.intro_audio_original = intro_audio.value;
+	basic_details.hangup_audio_original = hangup_audio.value;
+
+	console.log(basic_details);
+}
+
+
 
 function goToQuestion(questionNum) {
 	let form = document.getElementById('question_form_' + questionNum);
@@ -360,9 +387,9 @@ function goToQuestion(questionNum) {
 		audio_options_list_HTML += '<option value="'+ uploadedFiles[audio_n] +'">'+ uploadedFiles[audio_n] +'</option>';
 	}
 
-	form_group_1.innerHTML = '<div class="form-group"><label for="question_audio">Question audio</label><select id="question_audio" class="form-control">'+ audio_options_list_HTML + '</select></div>';
-	form_group_2.innerHTML = '<div class="form-group"><label for="question_prompt">Question prompt</label><input type="text" id="question_prompt" class="form-control"></div>';
-	form_group_3.innerHTML = '<div class="form-group"><label for="question_label">Question label</label><input type="text" id="question_label" class="form-control"></div>';
+	form_group_1.innerHTML = '<div class="form-group"><label for="question_audio">Question audio</label><select id="question_audio'+ questionNum +'" class="form-control">'+ audio_options_list_HTML + '</select></div>';
+	form_group_2.innerHTML = '<div class="form-group"><label for="question_prompt">Question prompt</label><input type="text" id="question_prompt'+ questionNum +'" class="form-control"></div>';
+	form_group_3.innerHTML = '<div class="form-group"><label for="question_label">Question label</label><input type="text" id="question_label'+ questionNum +'" class="form-control"></div>';
 
 	col4.append(form_group_1);
 	col4.append(form_group_2);
@@ -375,7 +402,7 @@ function goToQuestion(questionNum) {
 		dtmf_row.innerHTML = '';
 		// create dmtf cells and append to row
 		for (let i=0; i < 12; i++) {
-			dtmf_row.innerHTML += '<div class="col-4"><div class="card dtmf-cell"><div class="card-body"><div class="clearfix"><div class="float-left"><label><input type="checkbox" class="check-custom" onclick="updateDTMFStatus(event)"><span class="check-toggle"><span class="check-mark"></span></span></label></div><p class="float-right">DTMF 1</p></div></div></div></div>'
+			dtmf_row.innerHTML += '<div class="col-4"><div class="card dtmf-cell"><div class="card-body"><div class="clearfix"><div class="float-left"><label><input type="checkbox" id="dtmf_check_'+ questionNum +'_' + (i + 1) + '" class="check-custom" onclick="updateDTMFStatus(event, ' + (i + 1) + ', ' + questionNum + ')"><span class="check-toggle"><span class="check-mark"></span></span></label></div><p class="float-right">DTMF ' + (i + 1) + '</p></div></div></div></div>'
 		}
 		col8.append(dtmf_row);
 	}
@@ -389,16 +416,62 @@ function goToQuestion(questionNum) {
 	if (questionNum != initial_data.project_questions) {
 		let next_btn = document.createElement('div');
 		next_btn.classList.add('next-wrapper');
-		next_btn.innerHTML = '<div class="next-wrapper"><button type="submit" class="btn btn-primary" id="btn_next_step' + (questionNum) + '" onclick="goToQuestion(' + (questionNum + 1) + ')">Next step</button></div>';
+		next_btn.innerHTML = '<div class="next-wrapper"><button type="submit" class="btn btn-primary" id="btn_next_step' + (questionNum) + '" onclick="goToQuestion(' + (questionNum + 1) + '); saveQuestion('+ questionNum +')">Next step</button></div>';
 
 		form.append(next_btn);
 	} else {
 		let finish_btn = document.createElement('div');
 		finish_btn.classList.add('next-wrapper');
-		finish_btn.innerHTML = '<div class="next-wrapper"><button type="submit" class="btn btn-primary" id="finish_btn" onclick="finish()">Preview and save</button></div>';
+		finish_btn.innerHTML = '<div class="next-wrapper"><button type="submit" class="btn btn-primary" id="finish_btn" onclick="finish(); saveQuestion('+ questionNum +')">Preview and save</button></div>';
 
 		form.append(finish_btn);
 	}
+}
+
+
+
+function saveQuestion(num) {
+	// get data from form
+
+	let form = document.getElementById('question_form_' + num);
+	let question_file = document.getElementById('question_audio' + num);
+	let question_prompt = document.getElementById('question_prompt' + num);
+	let question_label = document.getElementById('question_label' + num);
+
+	let question_dtmfs = [];
+
+	if (initial_data.is_linear == true) {
+		for(let i=0; i < 12; i++) {
+			let dtmf_values;
+			let dtmf_check = document.getElementById('dtmf_check_' + num + '_' + (i+1));
+			let dtmf_text = document.getElementById('dtmf_text_' + num + '_' + (i+1));
+			let dtmf_select = document.getElementById('dtmf_select_' + num + '_' + (i+1));
+			
+			if (dtmf_text != null && dtmf_select != null) {
+				dtmf_values = [dtmf_check.checked, dtmf_text.value, dtmf_select.value];
+			} else if (dtmf_text != null && dtmf_select == null) {
+				dtmf_values = [dtmf_check.checked, dtmf_text.value];
+			} else {
+				dtmf_values = dtmf_check.checked;
+			}
+			
+			question_dtmfs.push(dtmf_values);
+		}
+	}
+
+	// save question data in questions array
+
+	let question = {
+		'question_id': num,
+		'question_file': question_file.value,
+		'question_prompt': question_prompt.value,
+		'question_label': question_label.value,
+		'question_dtmfs': question_dtmfs
+	}
+
+	questions.push(question);
+
+	console.log(questions);
 }
 
 
@@ -419,7 +492,30 @@ function finish() {
 
 
 
-function updateDTMFStatus(event) {
+function updateDTMFStatus(event, dtmf_num, question) {
 	let el = event.target;
-	console.log(el.checked);
+
+	let form_container = document.createElement('div');
+	form_container.classList.add('hide');
+	form_container.innerHTML = '<div class="form-group"><input type="text" id="dtmf_text_'+ question +'_' + dtmf_num + '" class="form-control"></div>'
+	
+	el.parentNode.parentNode.parentNode.parentNode.append(form_container);
+
+	// if this is not the last question, include select in skip logic
+	if (question != initial_data.project_questions) {
+		form_container.innerHTML += '<div class="form-group"><select name="" id="dtmf_select_'+ question +'_' + dtmf_num + '" class="form-control"></select></div>';
+
+		let dtmf_select = document.getElementById('dtmf_select_'+ question +'_' + dtmf_num);
+
+		for (let i=0; i < initial_data.project_questions; i++) {
+			dtmf_select.innerHTML += '<option value="question_' + (i+1) + '">Go to Question ' + (i+1) + '</option>';
+		}
+	}
+
+	// if checked, show the form
+	if(el.checked) {
+		form_container.classList.remove('hide');
+	} else {
+		form_container.classList.add('hide');
+	}
 }

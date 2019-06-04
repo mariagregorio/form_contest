@@ -27,108 +27,6 @@
 			  </li>
 			</ul>
 
-<!-- 
-			<form action="">
-				<h3>DTMF design</h3>
-				<div class="row dtmf-row">
-					<div class="col-4">
-						<div class="card dtmf-cell">
-						  <div class="card-body">
-						  	<div class="clearfix">
-									<div class="float-left">
-										<label>
-										  <input type="checkbox" class="check-custom" onclick="updateDTMFStatus(event)">
-										  <span class="check-toggle"><span class="check-mark"></span></span>
-										</label>
-									</div>
-							    <p class="float-right">DTMF 1</p>
-							  </div>
-						  	<div class="form-group">
-						  		<input type="text" class="form-control">
-						  	</div>
-						  	<div class="form-group">
-							    <select name="" id="" class="form-control">
-							    	<option value="">Option</option>
-							    </select>
-						  	</div>
-						  </div>
-						</div>
-					</div>
-					<div class="col-4">
-						<div class="card dtmf-cell">
-						  <div class="card-body">
-						    <div class="clearfix">
-									<div class="float-left" style="line-height:1;">
-										<label>
-										  <input type="checkbox" class="check-custom" hidden>
-										  <span class="check-toggle"></span>
-										</label>
-									</div>
-							    <p class="float-right">DTMF 1</p>
-							  </div>
-						  </div>
-						</div>
-					</div>
-					<div class="col-4">
-						<div class="card dtmf-cell">
-						  <div class="card-body">
-						    <div class="clearfix">
-									<div class="float-left" style="line-height:1;">
-										<label>
-										  <input type="checkbox" class="check-custom" hidden>
-										  <span class="check-toggle"></span>
-										</label>
-									</div>
-							    <p class="float-right">DTMF 1</p>
-							  </div>
-						  </div>
-						</div>
-					</div><div class="col-4">
-						<div class="card dtmf-cell">
-						  <div class="card-body">
-						    <div class="clearfix">
-									<div class="float-left" style="line-height:1;">
-										<label>
-										  <input type="checkbox" class="check-custom" hidden>
-										  <span class="check-toggle"></span>
-										</label>
-									</div>
-							    <p class="float-right">DTMF 1</p>
-							  </div>
-						  </div>
-						</div>
-					</div><div class="col-4">
-						<div class="card dtmf-cell">
-						  <div class="card-body">
-						    <div class="clearfix">
-									<div class="float-left" style="line-height:1;">
-										<label>
-										  <input type="checkbox" class="check-custom" hidden>
-										  <span class="check-toggle"></span>
-										</label>
-									</div>
-							    <p class="float-right">DTMF 1</p>
-							  </div>
-						  </div>
-						</div>
-					</div><div class="col-4">
-						<div class="card dtmf-cell">
-						  <div class="card-body">
-						    <div class="clearfix">
-									<div class="float-left" style="line-height:1;">
-										<label>
-										  <input type="checkbox" class="check-custom" hidden>
-										  <span class="check-toggle"></span>
-										</label>
-									</div>
-							    <p class="float-right">DTMF 1</p>
-							  </div>
-						  </div>
-						</div>
-					</div>
-				</div>
-			</form>
- -->
 			<form action="javascript:void(0);" autocomplete="off" class="needs-validation" id="form_start_survey" novalidate>
 			  <div class="form-group">
 			    <label for="survey_short_name">Survey short name</label>
@@ -370,7 +268,7 @@
 					</div>
 				</div>
 				<div class="next-wrapper">
-					<button type="submit" class="btn btn-primary" id="btn_next_step1" onclick="goToQuestion(1)">Next step</button>
+					<button type="submit" class="btn btn-primary" id="btn_next_step1" onclick="goToQuestion(1); saveBasicDetails()">Next step</button>
 				</div>
 				
 			</form>
