@@ -282,71 +282,71 @@
 				<div class="row">
 					<div class="col-sm-3">
 						<p class="subtitle">Survey ID</p>
-						<p class="desc">Whatever</p>
+						<p class="desc" id="prev_survey_id">Whatever</p>
 					</div>
 					<div class="col-sm-3">
 						<p class="subtitle">Survey short name</p>
-						<p class="desc">Whatever</p>
+						<p class="desc" id="prev_survey_name">Whatever</p>
 					</div>
 					<div class="col-sm-6">
 						<p class="subtitle">Survey description</p>
-						<p class="desc">Whatever Whatever Whatever Whatever Whatever Whatever.</p>
+						<p class="desc" id="prev_survey_desc">Whatever Whatever Whatever Whatever Whatever Whatever.</p>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-sm-3">
 						<p class="subtitle">Number of questions</p>
-						<p class="desc">5</p>
+						<p class="desc" id="prev_questions_number">5</p>
 					</div>
 					<div class="col-sm-3">
 						<p class="subtitle">Survey response goal</p>
-						<p class="desc">50</p>
+						<p class="desc" id="prev_response_goal">50</p>
 					</div>
 					<div class="col-sm-3">
 						<p class="subtitle">Audio volume</p>
-						<p class="desc">500</p>
+						<p class="desc" id="prev_audio_volume">500</p>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-sm-3">
 						<p class="subtitle">Survey created</p>
-						<p class="desc">7/1/2019</p>
+						<p class="desc" id="prev_survey_created">7/1/2019</p>
 					</div>
 					<div class="col-sm-3">
 						<p class="subtitle">Survey start date</p>
-						<p class="desc">7/1/2019</p>
+						<p class="desc" id="prev_survey_start_date">7/1/2019</p>
 					</div>
 					<div class="col-sm-3">
 						<p class="subtitle">Survey end date</p>
-						<p class="desc">9/1/2019</p>
+						<p class="desc" id="prev_survey_end_date">9/1/2019</p>
 					</div>
 					<div class="col-sm-3">
 						<p class="subtitle">Survey start-end time</p>
-						<p class="desc">00:30 - 03:20</p>
+						<p class="desc" id="prev_survey_startend_time">00:30 - 03:20</p>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-sm-3">
 						<p class="subtitle">Use survey skip logic?</p>
-						<p class="desc">Yes</p>
+						<p class="desc" id="prev_skip_logic">Yes</p>
 					</div>
 					<div class="col-sm-3">
 						<p class="subtitle">Enable AMD?</p>
-						<p class="desc">No</p>
+						<p class="desc" id="prev_enable_amd">No</p>
 					</div>
 					<div class="col-sm-3">
 						<p class="subtitle">Timeout</p>
-						<p class="desc">20</p>
+						<p class="desc" id="prev_timeout">20</p>
 					</div>
 					<div class="col-sm-3">
 						<p class="subtitle">Channels</p>
-						<p class="desc">9</p>
+						<p class="desc" id="prev_channels">9</p>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-sm-3">
 						<p class="subtitle">Trunk</p>
-						<p class="desc">73578</p>
+						<p class="desc" id="prev_trunk">73578</p>
 					</div>
 				</div>
 
@@ -354,15 +354,15 @@
 				<div class="row">
 					<div class="col-sm-3">
 						<p class="subtitle">Response tracking question</p>
-						<p class="desc">2</p>
+						<p class="desc" id="prev_response_tracking_question">2</p>
 					</div>
 					<div class="col-sm-3">
 						<p class="subtitle">Intro audio file</p>
-						<p class="desc"><i class="far fa-file-audio"></i> intro_surv.wav</p>
+						<p class="desc"><i class="far fa-file-audio"></i> <span id="prev_intro_audio_file">intro_surv.wav</span></p>
 					</div>
 					<div class="col-sm-3">
 						<p class="subtitle">Hangup audio file</p>
-						<p class="desc"><i class="far fa-file-audio"></i> hangup_audio.wav</p>
+						<p class="desc"><i class="far fa-file-audio"></i> <span id="prev_hangup_audio_file">hangup_audio.wav</span></p>
 					</div>
 				</div>
 
@@ -376,50 +376,14 @@
 				      <th scope="col">Question label</th>
 				    </tr>
 				  </thead>
-				  <tbody>
-				    <tr>
-				      <th scope="row">1</th>
-				      <td>What's your name?</td>
-				      <td><i class="far fa-file-audio"></i> some_audio_file.wav</td>
-				      <td>Name</td>
-				    </tr>
-				    <tr class="dtmf-tr">
-				    	<td></td>
-				    	<td colspan="3">
-				    		<table class="table-borderless">
-				    			<tr>
-				    				<td>DTMF 1</td>
-				    				<td>Whatvevr</td>
-				    				<td>Go to Question 4</td>
-				    			</tr>
-				    			<tr>
-				    				<td>DTMF 0</td>
-				    				<td>Somethin'</td>
-				    				<td>Go to Question 2</td>
-				    			</tr>
-				    			<tr>
-				    				<td>DTMF 5</td>
-				    				<td>Somethin' else</td>
-				    				<td>Go to Question 5</td>
-				    			</tr>
+				  <tbody id="questions_table_body">
 
-				    		</table>
-				    	</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">2</th>
-				      <td>What's your age?</td>
-				      <td><i class="far fa-file-audio"></i> some_audio_file.wav</td>
-				      <td>Age</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">3</th>
-				      <td>Where do you live?</td>
-				      <td><i class="far fa-file-audio"></i> some_audio_file.wav</td>
-				      <td>Address</td>
-				    </tr>
 				  </tbody>
 				</table>
+
+				<div class="next-wrapper">
+					<button type="submit" class="btn btn-primary">Submit Survey</button>
+				</div>
 			</div>
 			
 		</div>

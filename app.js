@@ -18,7 +18,7 @@ let initial_data = {
 };
 
 let basic_details = {
-	'base_project_id': 'AR0001',
+	'base_project_id': 'AkR08c001',
 	'response_tracking_question': null,
 	'intro_audio_original': null,
 	'hangup_audio_original': null
@@ -136,7 +136,6 @@ function generateSurvey() {
     event.preventDefault();
     event.stopPropagation();
   } else {
-  	console.log('proceed to basic details');
   	// hide or show forms
   	form_start_survey.classList.add('hide');
 		form_basic_details.classList.remove('hide');
@@ -152,7 +151,6 @@ function generateSurvey() {
   	// create question forms
   	let question_forms_wrapper = document.getElementById('question_forms_wrapper');
   	for (i=0; i < parseInt(project_questions); i++) {
-  		console.log('got here');
   		let question_form = document.createElement('form');
   		question_form.setAttribute('id', 'question_form_' + (i+1));
   		question_form.setAttribute('action', 'javascript:void(0)');
@@ -176,8 +174,6 @@ function generateSurvey() {
   	tab_basic_details.classList.remove('disabled');
   }
   form_start_survey.classList.add('was-validated');
-
-  console.log(initial_data);
 }
 
 
@@ -319,8 +315,6 @@ function saveBasicDetails() {
 	basic_details.response_tracking_question = response_tracking.value;
 	basic_details.intro_audio_original = intro_audio.value;
 	basic_details.hangup_audio_original = hangup_audio.value;
-
-	console.log(basic_details);
 }
 
 
@@ -333,7 +327,6 @@ function goToQuestion(questionNum) {
 	    event.preventDefault();
 	    event.stopPropagation();
 	  } else {
-	  	console.log('proceed to question 1');
 	  	form.classList.remove('hide');
 	  	let form_basic_details = document.getElementById('form_basic_details');
 			form_basic_details.classList.add('hide');
@@ -411,7 +404,7 @@ function goToQuestion(questionNum) {
 	} else {
 		let finish_btn = document.createElement('div');
 		finish_btn.classList.add('next-wrapper');
-		finish_btn.innerHTML = '<div class="next-wrapper"><button type="submit" class="btn btn-primary" id="finish_btn" onclick="finish(); saveQuestion('+ questionNum +')">Preview and save</button></div>';
+		finish_btn.innerHTML = '<div class="next-wrapper"><button type="submit" class="btn btn-primary" id="finish_btn" onclick="finish(); saveQuestion('+ questionNum +'); previewForm()">Preview and save</button></div>';
 
 		form.append(finish_btn);
 	}
@@ -459,8 +452,82 @@ function saveQuestion(num) {
 	}
 
 	questions.push(question);
+}
 
-	console.log(questions);
+
+function previewForm() {
+	// get elements from preview template and insert the values from the form
+	let prev_survey_id = document.getElementById('prev_survey_id');
+	let prev_survey_name = document.getElementById('prev_survey_name');
+	let prev_survey_desc = document.getElementById('prev_survey_desc');
+	let prev_questions_number = document.getElementById('prev_questions_number');
+	let prev_response_goal = document.getElementById('prev_response_goal');
+	let prev_audio_volume = document.getElementById('prev_audio_volume');
+	let prev_survey_created = document.getElementById('prev_survey_created');
+	let prev_survey_start_date = document.getElementById('prev_survey_start_date');
+	let prev_survey_end_date = document.getElementById('prev_survey_end_date');
+	let prev_survey_startend_time = document.getElementById('prev_survey_startend_time');
+	let prev_skip_logic = document.getElementById('prev_skip_logic');
+	let prev_enable_amd = document.getElementById('prev_enable_amd');
+	let prev_timeout = document.getElementById('prev_timeout');
+	let prev_channels = document.getElementById('prev_channels');
+	let prev_trunk = document.getElementById('prev_trunk');
+	let prev_response_tracking_question = document.getElementById('prev_response_tracking_question');
+	let prev_intro_audio_file = document.getElementById('prev_intro_audio_file');
+	let prev_hangup_audio_file = document.getElementById('prev_hangup_audio_file');
+
+	prev_survey_id.innerHTML = basic_details.base_project_id;
+	prev_survey_name.innerHTML = initial_data.project_name;
+	prev_survey_desc.innerHTML = initial_data.project_desc;
+	prev_questions_number.innerHTML = initial_data.project_questions;
+	prev_response_goal.innerHTML = initial_data.project_response_goal;
+	prev_audio_volume.innerHTML = initial_data.project_volume;
+	prev_survey_created.innerHTML = initial_data.project_created;
+	prev_survey_start_date.innerHTML = initial_data.project_startdate;
+	prev_survey_end_date.innerHTML = initial_data.project_enddate;
+	prev_survey_startend_time.innerHTML = initial_data.project_starttime + ' - ' + initial_data.project_endtime;
+	if (initial_data.is_linear == true) {
+		prev_skip_logic.innerHTML = 'Yes';
+	} else {
+		prev_skip_logic.innerHTML = 'No';
+	}
+	if (initial_data.amd_enabled == true) {
+		prev_enable_amd.innerHTML = 'Yes';
+	} else {
+		prev_enable_amd.innerHTML = 'No';
+	}
+	prev_timeout.innerHTML = initial_data.project_timeout;
+	prev_channels.innerHTML = initial_data.project_channels;
+	prev_trunk.innerHTML = initial_data.trunk_id;
+	prev_response_tracking_question.innerHTML = basic_details.response_tracking_question;
+	prev_intro_audio_file.innerHTML = basic_details.intro_audio_original;
+	prev_hangup_audio_file.innerHTML = basic_details.hangup_audio_original;
+
+
+	let questions_table_body = document.getElementById('questions_table_body');
+
+	for (let i=0; i < questions.length; i++) {
+		let tr = document.createElement('tr');
+		tr.setAttribute('id', 'tr_question_' + (i+1));
+		questions_table_body.append(tr);
+
+		if (initial_data.is_linear == true) {
+			let tr_dtmf = document.createElement('tr');
+			tr_dtmf.setAttribute('id', 'tr_dtmf_question_' + (i+1));
+			tr_dtmf.classList.add('dtmf-tr');
+			questions_table_body.append(tr_dtmf);
+			tr_dtmf.innerHTML = '<td></td><td colspan="3"><table class="table-borderless" id="dtmf_table_question'+ (i+1) +'"></table></td>';
+			let dtmf_table = document.getElementById('dtmf_table_question'+ (i+1));
+			dtmf_table.innerHTML = '';
+			for (let j=0; j < questions[i].question_dtmfs.length; j++) {
+				if(questions[i].question_dtmfs[j] != false) {
+					dtmf_table.innerHTML += '<tr><td>DTMF '+ (j+1) +'</td><td>'+ questions[i].question_dtmfs[j][1] +'</td><td>Go to '+ questions[i].question_dtmfs[j][2] +'</td></tr>';
+				}
+			}
+		}
+
+		tr.innerHTML = '<th scope="row">'+ (i+1) +'</th><td>'+ questions[i].question_prompt +'</td><td><i class="far fa-file-audio"></i> '+ questions[i].question_file +'</td><td>'+ questions[i].question_label +'</td>';
+	}
 }
 
 
