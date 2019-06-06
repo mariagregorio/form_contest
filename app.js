@@ -377,17 +377,16 @@ function goToQuestion(questionNum) {
 	col4.append(form_group_2);
 	col4.append(form_group_3);
 
-	// if skip logic is on, show DTMF form
-	if (initial_data.is_linear == true) {
-		let dtmf_row = document.createElement('div');
-		dtmf_row.classList.add('dtmf-row', 'row');
-		dtmf_row.innerHTML = '';
-		// create dmtf cells and append to row
-		for (let i=0; i < 12; i++) {
-			dtmf_row.innerHTML += '<div class="col-4"><div class="card dtmf-cell"><div class="card-body"><div class="clearfix"><div class="float-left"><label><input type="checkbox" id="dtmf_check_'+ questionNum +'_' + (i + 1) + '" class="check-custom" onclick="updateDTMFStatus(event, ' + (i + 1) + ', ' + questionNum + ')"><span class="check-toggle"><span class="check-mark"></span></span></label></div><p class="float-right">DTMF ' + (i + 1) + '</p></div></div></div></div>'
-		}
-		col8.append(dtmf_row);
+
+	let dtmf_row = document.createElement('div');
+	dtmf_row.classList.add('dtmf-row', 'row');
+	dtmf_row.innerHTML = '';
+	// create dmtf cells and append to row
+	for (let i=0; i < 12; i++) {
+		dtmf_row.innerHTML += '<div class="col-4"><div class="card dtmf-cell"><div class="card-body"><div class="clearfix"><div class="float-left"><label><input type="checkbox" id="dtmf_check_'+ questionNum +'_' + (i + 1) + '" class="check-custom" onclick="updateDTMFStatus(event, ' + (i + 1) + ', ' + questionNum + ')"><span class="check-toggle"><span class="check-mark"></span></span></label></div><p class="float-right">DTMF ' + (i + 1) + '</p></div></div></div></div>'
 	}
+	col8.append(dtmf_row);
+	
 
 	row.append(col4);
 	row.append(col8);
@@ -422,27 +421,24 @@ function saveQuestion(num) {
 
 	let question_dtmfs = [];
 
-	if (initial_data.is_linear == true) {
-		for(let i=0; i < 12; i++) {
-			let dtmf_values;
-			let dtmf_check = document.getElementById('dtmf_check_' + num + '_' + (i+1));
-			let dtmf_text = document.getElementById('dtmf_text_' + num + '_' + (i+1));
-			let dtmf_select = document.getElementById('dtmf_select_' + num + '_' + (i+1));
+	for(let i=0; i < 12; i++) {
+		let dtmf_values;
+		let dtmf_check = document.getElementById('dtmf_check_' + num + '_' + (i+1));
+		let dtmf_text = document.getElementById('dtmf_text_' + num + '_' + (i+1));
+		let dtmf_select = document.getElementById('dtmf_select_' + num + '_' + (i+1));
 
-			if (dtmf_text != null && dtmf_select != null) {
-				dtmf_values = [dtmf_check.checked, dtmf_text.value, dtmf_select.value];
-			} else if (dtmf_text != null && dtmf_select == null) {
-				dtmf_values = [dtmf_check.checked, dtmf_text.value];
-			} else {
-				dtmf_values = dtmf_check.checked;
-			}
-			
-			question_dtmfs.push(dtmf_values);
+		if (dtmf_text != null && dtmf_select != null) {
+			dtmf_values = [dtmf_check.checked, dtmf_text.value, dtmf_select.value];
+		} else if (dtmf_text != null && dtmf_select == null) {
+			dtmf_values = [dtmf_check.checked, dtmf_text.value];
+		} else {
+			dtmf_values = dtmf_check.checked;
 		}
+		
+		question_dtmfs.push(dtmf_values);
 	}
-
+	
 	// save question data in questions array
-
 	let question = {
 		'question_id': num,
 		'question_file': question_file.value,
@@ -511,18 +507,17 @@ function previewForm() {
 		tr.setAttribute('id', 'tr_question_' + (i+1));
 		questions_table_body.append(tr);
 
-		if (initial_data.is_linear == true) {
-			let tr_dtmf = document.createElement('tr');
-			tr_dtmf.setAttribute('id', 'tr_dtmf_question_' + (i+1));
-			tr_dtmf.classList.add('dtmf-tr');
-			questions_table_body.append(tr_dtmf);
-			tr_dtmf.innerHTML = '<td></td><td colspan="3"><table class="table-borderless" id="dtmf_table_question'+ (i+1) +'"></table></td>';
-			let dtmf_table = document.getElementById('dtmf_table_question'+ (i+1));
-			dtmf_table.innerHTML = '';
-			for (let j=0; j < questions[i].question_dtmfs.length; j++) {
-				if(questions[i].question_dtmfs[j] != false) {
-					dtmf_table.innerHTML += '<tr><td>DTMF '+ (j+1) +'</td><td>'+ questions[i].question_dtmfs[j][1] +'</td><td>Go to '+ questions[i].question_dtmfs[j][2] +'</td></tr>';
-				}
+
+		let tr_dtmf = document.createElement('tr');
+		tr_dtmf.setAttribute('id', 'tr_dtmf_question_' + (i+1));
+		tr_dtmf.classList.add('dtmf-tr');
+		questions_table_body.append(tr_dtmf);
+		tr_dtmf.innerHTML = '<td></td><td colspan="3"><table class="table-borderless" id="dtmf_table_question'+ (i+1) +'"></table></td>';
+		let dtmf_table = document.getElementById('dtmf_table_question'+ (i+1));
+		dtmf_table.innerHTML = '';
+		for (let j=0; j < questions[i].question_dtmfs.length; j++) {
+			if(questions[i].question_dtmfs[j] != false) {
+				dtmf_table.innerHTML += '<tr><td>DTMF '+ (j+1) +'</td><td>'+ questions[i].question_dtmfs[j][1] +'</td><td>Go to '+ questions[i].question_dtmfs[j][2] +'</td></tr>';
 			}
 		}
 
@@ -557,8 +552,8 @@ function updateDTMFStatus(event, dtmf_num, question) {
 	
 	el.parentNode.parentNode.parentNode.parentNode.append(form_container);
 
-	// if this is not the last question, include select in skip logic
-	if (question != initial_data.project_questions) {
+	// if this is not the last question OR skip logic is on, include select in dtmfs
+	if (question != initial_data.project_questions && initial_data.is_linear == true) {
 		form_container.innerHTML += '<div class="form-group"><select name="" id="dtmf_select_'+ question +'_' + dtmf_num + '" class="form-control"></select></div>';
 
 		let dtmf_select = document.getElementById('dtmf_select_'+ question +'_' + dtmf_num);
