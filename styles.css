@@ -4,8 +4,8 @@ light cfd8dc
 med b0bec5
 dark 90a4ae
 
-primary 455a64
-primary hover 37474f
+primary 1565c0
+primary hover 003c8f
 */
 
 
@@ -48,19 +48,19 @@ hr {
 	text-transform: uppercase;
 	font-size: 1rem;
 	text-align: center;
-	color: #455a64;
+	color: #1565c0;
 }
 
 .nav.steps .nav-item .nav-link {
 	border-radius: 0px;
 	background: #eceff1;
-	color: #455a64;
+	color: #1565c0;
 	font-weight: 400;
 }
 
 .nav.steps .nav-item .nav-link.active {
 	font-weight: 500;
-	border-bottom: 3px solid #455a64;
+	border-bottom: 3px solid #1565c0;
 }
 .nav.steps .nav-item .nav-link.disabled {
 	color: #b0bec5;
@@ -172,37 +172,52 @@ input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   height: 30px;
   width: 14px;
-  border-radius: 3px;
-  background: #cfd8dc;
+  border-radius: 100px;
+  background: #1976d2;
   cursor: pointer;
   margin-top: -10px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
 }
 /* All the same stuff for IE */
 /* All the same stuff for Firefox */
-input[type=range]::-moz-range-thumb,
+input[type=range]::-moz-range-thumb {
+  height: 30px;
+  width: 14px;
+  border-radius: 100px;
+  background: #1976d2;
+  cursor: pointer;
+  border:0;
+}
 input[type=range]::-ms-thumb {
   height: 30px;
   width: 14px;
-  border-radius: 3px;
-  background: #cfd8dc;
+  border-radius: 100px;
+  background: #1976d2;
   cursor: pointer;
 }
 input[type=range]::-webkit-slider-runnable-track {
   width: 100%;
   height: 10px;
   cursor: pointer;
-  background: #eceff1;
+  background: #cfd8dc;
   border-radius: 2px;
+  transition: all .5s;
+}
+
+input[type=range]:hover::-webkit-slider-runnable-track {
+	background: #b0bec5;
+}
+input[type=range]:hover::-moz-range-track {
+	background: #b0bec5;
 }
 input[type=range]:focus::-webkit-slider-runnable-track,
 input[type=range]:focus::-ms-fill-lower  {
-  background: #eceff1;
+  background: #cfd8dc;
 }
 input[type=range]::-moz-range-track {
   width: 100%;
   height: 10px;
   cursor: pointer;
-  background: #eceff1;
+  background: #cfd8dc;
   border-radius: 2px;
 }
 
@@ -227,13 +242,13 @@ input[type=range]:focus::-ms-fill-upper {
 }
 .btn-primary {
     color: #fff;
-    background-color: #455a64;
-    border-color: #455a64;
+    background-color: #1565c0;
+    border-color: #1565c0;
 }
 .btn-primary:hover {
     color: #fff;
-    background-color: #37474f;
-    border-color: #37474f;
+    background-color: #003c8f;
+    border-color: #003c8f;
 }
 .btn {
     display: inline-block;
@@ -271,7 +286,8 @@ input[type=range]:focus::-ms-fill-upper {
 }
 .count-input input.form-control {
 	display: inline-block;
-	max-width: 60px;
+	max-width: 40px;
+	font-size: 1rem;
 	text-align: center;
 	border:0px;
 	padding:0px;
@@ -279,7 +295,8 @@ input[type=range]:focus::-ms-fill-upper {
 
 .count-input .btn-circle {
 	display: block;
-	color: #455a64;
+	color: #424242;
+	background: #cfd8dc;
   width: 30px;
   height: 30px;
   border-radius: .4rem;
@@ -288,7 +305,7 @@ input[type=range]:focus::-ms-fill-upper {
   transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 .count-input .btn-circle:hover {
-  color: #37474f;
+  background: #b0bec5;
 }
 .count-input .btn-circle i {
 	position: absolute;
@@ -315,7 +332,7 @@ input[type=range]:focus::-ms-fill-upper {
 }
 .btn-yes-no:hover {
 	background: #cfd8dc;
-	color: #37474f;
+	color: #003c8f;
 }
 .btn-yes-no.left {
 	border-radius: 100px 0 0 100px;
@@ -324,12 +341,12 @@ input[type=range]:focus::-ms-fill-upper {
 	border-radius: .0rem 100px 100px 0;
 }
 .btn-yes-no.selected {
-	background-color: #455a64;
+	background-color: #1565c0;
 	color: #fff;
 	font-weight: 500;
 }
 .btn-yes-no.selected:hover {
-	background-color: #37474f;
+	background-color: #003c8f;
 	color: #fff;
 }
 
@@ -427,10 +444,10 @@ ul.list-group li {
 #files_list li .delete-file {
 	cursor: pointer;
 	font-size: 1.1rem;
-	color: #455a64;
+	color: #1565c0;
 }
 #files_list li .delete-file:hover {
-	color: #37474f;
+	color: #003c8f;
 }
 
 
@@ -518,7 +535,7 @@ input[type='checkbox'].check-custom ~ .check-toggle .check-mark {
 }
 input[type='checkbox'].check-custom:checked ~ .check-toggle .check-mark {
 	left:0;
-	background: #455a64;
+	background: #1565c0;
 }
 
 
@@ -575,4 +592,8 @@ p.desc {
 }
 .table .dtmf-tr table tr td {
 	padding: .5rem 0;
+}
+
+.datepicker--day-name {
+    color: #1565c0;
 }
