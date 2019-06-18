@@ -597,3 +597,8 @@ p.desc {
 .datepicker--day-name {
     color: #1565c0;
 }
+
+
+.form-control:disabled, .form-control[readonly] {
+    background-color: #fff;
+}
