@@ -127,7 +127,7 @@ function generateSurvey() {
 	let project_questions = document.getElementById('num_questions').value;
 	let project_startdate = document.getElementById('start_date').value;
 	let project_enddate = document.getElementById('end_date').value;
-	let project_created = document.getElementById('create_date').value;
+	let project_created = new Date();
 	let project_response_goal = document.getElementById('response_goal').value;
 	let project_starttime = document.getElementById('start_time').value;
 	let project_endtime = document.getElementById('end_time').value;
@@ -196,16 +196,14 @@ function generateSurvey() {
 // DATE AND TIME PICKERS
 let start_date_dp = $('#start_date').datepicker().data('datepicker');
 let end_date_dp = $('#end_date').datepicker().data('datepicker');
-let create_date_dp = $('#create_date').datepicker().data('datepicker');
 
 $('#start_date_input').on('click', function(){
     start_date_dp.show();
 });
 $('#end_date_input').on('click', function(){
-    end_date_dp.show();
-});
-$('#create_date_input').on('click', function(){
-    create_date_dp.show();
+	if (end_date_picker.disabled == false) {
+		end_date_dp.show();
+	}
 });
 
 
@@ -221,32 +219,49 @@ $('#end_time_input').on('click', function(){
 
 
 
+let end_date_picker = document.getElementById('end_date');
+let min_end_date = new Date();
 
+
+let startTime = new Date(2019, 5, 6, 9, 0, 0);
+let endTime = new Date(2019, 5, 6, 21, 0, 0);
 
 // DOCUMENT READY
 $( document ).ready(function() {
 
 	let today = new Date();
+	document.getElementById('created_date').innerHTML = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();
+
 
 	// set up date & time pickers
 
-  $('#start_time').timepicker({ 'timeFormat': 'H:i' });
+  $('#start_time').timepicker({ 'timeFormat': 'H:i'});
   $('#end_time').timepicker({ 'timeFormat': 'H:i' });
+
+  $('#start_time').timepicker('setTime', startTime);
+  $('#end_time').timepicker('setTime', endTime);
+
+
 
   $('#start_date').datepicker({
   	'autoClose': true,
   	'dateFormat': 'yyyy-mm-dd',
   	'startDate': today,
-  	'minDate': today
+  	'minDate': today,
+  	'onSelect': function (fd, d, picker) {
+        end_date_picker.disabled = false;
+        let aDate = document.getElementById('start_date').value;
+        aDate = aDate.split('-');
+        min_end_date = new Date(aDate[0], aDate[1], aDate[2]);
+		$('#end_date').datepicker({
+			'autoClose': true,
+			'dateFormat': 'yyyy-mm-dd',
+			'minDate': min_end_date
+		});
+    }
   });
-  $('#end_date').datepicker({
-  	'autoClose': true,
-  	'dateFormat': 'yyyy-mm-dd'
-  });
-  $('#create_date').datepicker({
-  	'autoClose': true,
-  	'dateFormat': 'yyyy-mm-dd'
-  });
+
+
 
   // set up forms visibility
 
