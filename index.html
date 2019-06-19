@@ -173,10 +173,10 @@
 								<label for="trunk">Trunk</label>
 								<select id="trunk" class="form-control" onchange="updateChannels(event)" required>
 									<option disabled selected>Choose</option>
-									<option value="Trunk name 1">Trunk name 1</option>
-									<option value="Trunk name 2">Trunk name 2</option>
-									<option value="Trunk name 3">Trunk name 3</option>
-									<option value="Trunk name 4">Trunk name 4</option>
+									<option value="10">Trunk 10</option>
+									<option value="25">Trunk 25</option>
+									<option value="50">Trunk 50</option>
+									<option value="100">Trunk 100</option>
 						 		</select>
 						 		<div class="invalid-feedback">
 					          Required field.
@@ -186,7 +186,7 @@
 						<div class="col-sm-4">
 							<div class="form-group">
 						    <label for="formControlRange">Channels: <span id="channelsDisplay">1</span></label>
-						    <input type="range" class="form-control-range" id="channels" min="1" max="100" value="1" onchange="updateChannels(event)">
+						    <input type="range" class="form-control-range" id="channels" min="1" max="100" value="1" onchange="setChannels(event)">
 				  		</div>
 						</div>
 					</div>
@@ -397,7 +397,7 @@
 </div>
 
 
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="libraries/jquery-3.4.1.min.js"></script>
 	<script src="libraries/popper.min.js"></script>
 	<script src="libraries/bootstrap.min.js"></script>
 	<script src="libraries/jquery.timepicker.min.js"></script>

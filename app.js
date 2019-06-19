@@ -92,32 +92,15 @@ function updateVolumeDisplay(event) {
 
 
 function updateChannels(event) {
-	if (event.target.value == 'Trunk name 1') {
-		document.getElementById('channels').value = 9;
-		document.getElementById('channelsDisplay').innerText = '9';
-		initial_data.project_channels = 9;
-	} else if (event.target.value == 'Trunk name 2') {
-		document.getElementById('channels').value = 5;
-		document.getElementById('channelsDisplay').innerText = '5';
-		initial_data.project_channels = 5;
-	} else if (event.target.value == 'Trunk name 3') {
-		document.getElementById('channels').value = 25;
-		document.getElementById('channelsDisplay').innerText = '25';
-		initial_data.project_channels = 25;
-	} else if (event.target.value == 'Trunk name 4') {
-		document.getElementById('channels').value = 100;
-		document.getElementById('channelsDisplay').innerText = '100';
-		initial_data.project_channels = 100;
-	} else {
-		document.getElementById('channels').value = parseInt(event.target.value);
-		document.getElementById('channelsDisplay').innerText = parseInt(event.target.value);
-		initial_data.project_channels = parseInt(event.target.value);
-	}
-		
+	let value = parseInt(event.target.value);
+	let channelsRangeInput = document.getElementById('channels');
+	channelsRangeInput.setAttribute('max', value);
 }
 
-
-
+function setChannels(event) {
+	initial_data.project_channels = parseInt(event.target.value);
+	document.getElementById('channelsDisplay').innerText = event.target.value;
+}
 
 
 // START SURVEY SUBMIT
@@ -252,7 +235,7 @@ $( document ).ready(function() {
         end_date_picker.disabled = false;
         let aDate = document.getElementById('start_date').value;
         aDate = aDate.split('-');
-        min_end_date = new Date(aDate[0], aDate[1], aDate[2]);
+        min_end_date = new Date(aDate[0], aDate[1]-1, aDate[2]);
 		$('#end_date').datepicker({
 			'autoClose': true,
 			'dateFormat': 'yyyy-mm-dd',
@@ -412,7 +395,7 @@ function goToQuestion(questionNum) {
 		audio_options_list_HTML += '<option value="'+ uploadedFiles[audio_n] +'">'+ uploadedFiles[audio_n] +'</option>';
 	}
 
-	form_group_1.innerHTML = '<div class="form-group"><label for="question_audio">Question audio</label><select id="question_audio'+ questionNum +'" class="form-control">'+ audio_options_list_HTML + '</select></div>';
+	form_group_1.innerHTML = '<div class="form-group"><label for="question_audio">Question audio</label><select id="question_audio'+ questionNum +'" class="form-control"><option value="None" disabled selected>None</option>'+ audio_options_list_HTML + '</select></div>';
 	form_group_2.innerHTML = '<div class="form-group"><label for="question_prompt">Question prompt</label><input type="text" id="question_prompt'+ questionNum +'" class="form-control"></div>';
 	form_group_3.innerHTML = '<div class="form-group"><label for="question_label">Question label</label><input type="text" id="question_label'+ questionNum +'" class="form-control"></div>';
 
