@@ -602,3 +602,13 @@ p.desc {
 .form-control:disabled, .form-control[readonly] {
     background-color: #fff;
 }
+
+.channels-label i {
+	cursor: pointer;
+	display: inline-block;
+	margin: 0 .4rem;
+	color: #1565c0;
+}
+.channels-label i:hover {
+	color: #003c8f;
+}

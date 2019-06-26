@@ -185,7 +185,7 @@
 						</div>
 						<div class="col-sm-4">
 							<div class="form-group">
-						    <label for="formControlRange">Channels: <span id="channelsDisplay">1</span></label>
+						    <label for="formControlRange" class="channels-label">Channels: <i onclick="updateChannelsValue('minus')" id="channelsMinus" class="fas fa-minus"></i><span id="channelsDisplay">1</span><i onclick="updateChannelsValue('plus')" id="channelsPlus" class="fas fa-plus"></i></label>
 						    <input type="range" class="form-control-range" id="channels" min="1" max="100" value="1" onchange="setChannels(event)">
 				  		</div>
 						</div>

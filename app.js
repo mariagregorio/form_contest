@@ -95,11 +95,24 @@ function updateChannels(event) {
 	let value = parseInt(event.target.value);
 	let channelsRangeInput = document.getElementById('channels');
 	channelsRangeInput.setAttribute('max', value);
+	channelsRangeInput.value = value;
+	document.getElementById('channelsDisplay').innerText = value;
 }
 
 function setChannels(event) {
 	initial_data.project_channels = parseInt(event.target.value);
 	document.getElementById('channelsDisplay').innerText = event.target.value;
+}
+
+function updateChannelsValue(op) {
+	let channelsRangeInput = document.getElementById('channels');
+
+	if (op == 'plus') {
+		channelsRangeInput.value = parseInt(channelsRangeInput.value) + 1;
+	} else if (op == 'minus') {
+		channelsRangeInput.value -= 1;
+	}
+	document.getElementById('channelsDisplay').innerText = channelsRangeInput.value;
 }
 
 
