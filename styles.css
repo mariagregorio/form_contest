@@ -545,12 +545,6 @@ input[type='checkbox'].check-custom:checked ~ .check-toggle .check-mark {
 
 
 
-
-
-
-
-
-
 .preview {
 	background: #fff;
 	padding: 2rem;
@@ -611,4 +605,15 @@ p.desc {
 }
 .channels-label i:hover {
 	color: #003c8f;
+}
+
+
+.multi-select {
+	background: #f1f1f1 !important;	
+	padding:0 !important;
+}
+
+.multi-select option {
+	font-family: 'Roboto', sans-serif;
+	padding: .3rem .75rem;
 }

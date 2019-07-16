@@ -160,39 +160,7 @@
 				  					No
 				  				</div>
 				  			</div>
-				  		</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="form-group">
-				  			<label for="create_date">Survey created</label>
-					  		<p id="created_date"></p>
 							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="form-group">
-								<label for="trunk">Trunk</label>
-								<select id="trunk" class="form-control" onchange="updateChannels(event)" required>
-									<option disabled selected>Choose</option>
-									<option value="10">Trunk 10</option>
-									<option value="25">Trunk 25</option>
-									<option value="50">Trunk 50</option>
-									<option value="100">Trunk 100</option>
-						 		</select>
-						 		<div class="invalid-feedback">
-					          Required field.
-					        </div>
-							</div>
-						</div>
-						<div class="col-sm-4">
-							<div class="form-group">
-						    <label for="formControlRange" class="channels-label">Channels: <i onclick="updateChannelsValue('minus')" id="channelsMinus" class="fas fa-minus"></i><span id="channelsDisplay">1</span><i onclick="updateChannelsValue('plus')" id="channelsPlus" class="fas fa-plus"></i></label>
-						    <input type="range" class="form-control-range" id="channels" min="1" max="100" value="1" onchange="setChannels(event)">
-				  		</div>
-						</div>
-					</div>
-
-					<div class="row row-four">
-						<div class="col-sm-2">
 							<div class="form-group">
 				  			<div class="clearfix">
 				  				<div class="info-tooltip float-right">
@@ -209,6 +177,42 @@
 				  				</div>
 				  			</div>
 				  		</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group">
+				  			<label for="create_date">Survey created</label>
+					  		<p id="created_date"></p>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="trunk" class="mr-auto">Trunk </label>
+								<div class="float-right"><label><span style="font-weight:400; margin-right:5px;">Multiple</span><input type="checkbox" id="trunk_toggle" class="check-custom" onclick="trunkToggle();"><span class="check-toggle"><span class="check-mark"></span></span></label></div>
+								
+								<select id="trunk" class="form-control" onchange="updateChannels(event)" required>
+									<option id="choose" disabled selected>Choose</option>
+									<option value="10" onmousedown="trunkOptionToggle(event)">Trunk 10</option>
+									<option value="25" onmousedown="trunkOptionToggle(event)">Trunk 25</option>
+									<option value="50" onmousedown="trunkOptionToggle(event)">Trunk 50</option>
+									<option value="100" onmousedown="trunkOptionToggle(event)">Trunk 100</option>
+						 		</select>
+						 		<div class="invalid-feedback">
+					          Required field.
+					        </div>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="form-group">
+						    <label for="formControlRange" class="channels-label">Channels: <i onclick="updateChannelsValue('minus')" id="channelsMinus" class="fas fa-minus"></i><span id="channelsDisplay">1</span><i onclick="updateChannelsValue('plus')" id="channelsPlus" class="fas fa-plus"></i></label>
+						    <input type="range" class="form-control-range" id="channels" min="1" max="100" value="1" onchange="setChannels(event)">
+							</div>
+							<div id="multi_channels"></div>
+						</div>
+					</div>
+
+					<div class="row row-four">
+						<div class="col-sm-2">
+							
 						</div>
 					</div>
 				</div>
@@ -398,7 +402,6 @@
 		</div>
 	</div>
 </div>
-
 
 	<script src="libraries/jquery-3.4.1.min.js"></script>
 	<script src="libraries/popper.min.js"></script>
