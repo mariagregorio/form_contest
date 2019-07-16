@@ -246,10 +246,10 @@
 									<i class="fas fa-cloud-upload-alt"></i>
 									<h5>Drop files here</h5>
 								</div>
-								<input type="file" id="file_upload_input" class="file-input" name="file" onchange="updateFilesList()" multiple required />
+								<input type="file" id="file_upload_input" class="form-control file-input" name="file" onchange="updateFilesList()" multiple required />
 								<div class="invalid-feedback">
 				          Required field.
-				        </div>
+				        </div>	
 							</div>
 
 							<ul id="files_list" class="list-group"></ul>
@@ -261,8 +261,11 @@
 					<div class="col-sm-6">
 						<div class="form-group hide" id="intro_audio_group">
 							<label for="intro_audio">Intro Audio</label>
-							<select id="intro_audio" class="form-control">
+							<select id="intro_audio" class="form-control" required>
 							</select>
+							<div class="invalid-feedback">
+								Required field.
+							</div>
 						</div>
 					</div>
 					<div class="col-sm-6">

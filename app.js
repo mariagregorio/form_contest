@@ -162,8 +162,9 @@ function generateSurvey() {
   		let question_form = document.createElement('form');
   		question_form.setAttribute('id', 'question_form_' + (i+1));
   		question_form.setAttribute('action', 'javascript:void(0)');
-  		question_form.setAttribute('autocomplete', 'off');
-  		question_form.classList.add('hide');
+			question_form.setAttribute('autocomplete', 'off');
+			question_form.classList.add('hide', 'needs-validation');
+			question_form.noValidate = true;
 
   		question_forms_wrapper.append(question_form);
 
@@ -325,10 +326,14 @@ function updateIntroHangupAudioSelect() {
 
 	let none1 = document.createElement('option');
 	let none2 = document.createElement('option');
-	none1.setAttribute('value', 'none');
-	none2.setAttribute('value', 'none');
-	none1.innerHTML = 'None';
-	none2.innerHTML = 'None';
+
+	none1.innerHTML = '';
+	none2.innerHTML = '';
+	none1.disabled = true;
+	none2.disabled = true;
+	none1.selected = true;
+	none2.selected = true;
+
 	intro_select.append(none1);
 	hangup_select.append(none2);
 
@@ -359,37 +364,9 @@ function saveBasicDetails() {
 
 
 function goToQuestion(questionNum) {
+
+	// CREATE THE FORM AND CONTENT
 	let form = document.getElementById('question_form_' + questionNum);
-
-	if (questionNum == 1) {
-		if (form_basic_details.checkValidity() === false) {
-	    event.preventDefault();
-	    event.stopPropagation();
-	  } else {
-	  	form.classList.remove('hide');
-	  	let form_basic_details = document.getElementById('form_basic_details');
-			form_basic_details.classList.add('hide');
-
-			let question_tab = document.getElementById('tab_question_' + questionNum);
-			let tab_basic_details = document.getElementById('tab_basic_details');
-
-			tab_basic_details.classList.remove('active');
-			tab_basic_details.classList.add('disabled');
-			question_tab.classList.remove('disabled');
-			question_tab.classList.add('active');
-	  }
-	} else {
-		form.classList.remove('hide');
-		let question_tab = document.getElementById('tab_question_' + questionNum);
-		let question_tab_last = document.getElementById('tab_question_' + (questionNum - 1));
-		question_tab_last.classList.remove('active');
-		question_tab_last.classList.add('disabled');
-		question_tab.classList.remove('disabled');
-		question_tab.classList.add('active');
-
-		let form_last = document.getElementById('question_form_' + (questionNum - 1));
-		form_last.classList.add('hide');
-	}
 
 	let row = document.createElement('div');
 	row.classList.add('row');
@@ -408,9 +385,9 @@ function goToQuestion(questionNum) {
 		audio_options_list_HTML += '<option value="'+ uploadedFiles[audio_n] +'">'+ uploadedFiles[audio_n] +'</option>';
 	}
 
-	form_group_1.innerHTML = '<div class="form-group"><label for="question_audio">Question audio</label><select id="question_audio'+ questionNum +'" class="form-control"><option value="None" disabled selected>None</option>'+ audio_options_list_HTML + '</select></div>';
-	form_group_2.innerHTML = '<div class="form-group"><label for="question_prompt">Question prompt</label><input type="text" id="question_prompt'+ questionNum +'" class="form-control"></div>';
-	form_group_3.innerHTML = '<div class="form-group"><label for="question_label">Question label</label><input type="text" id="question_label'+ questionNum +'" class="form-control"></div>';
+	form_group_1.innerHTML = '<div class="form-group"><label for="question_audio">Question audio</label><select id="question_audio'+ questionNum +'" class="form-control" required><option disabled selected></option>'+ audio_options_list_HTML + '</select><div class="invalid-feedback">Required field.</div></div>';
+	form_group_2.innerHTML = '<div class="form-group"><label for="question_prompt">Question prompt</label><input type="text" id="question_prompt'+ questionNum +'" class="form-control" required><div class="invalid-feedback">Required field.</div></div>';
+	form_group_3.innerHTML = '<div class="form-group"><label for="question_label">Question label</label><input type="text" id="question_label'+ questionNum +'" class="form-control" required><div class="invalid-feedback">Required field.</div></div>';
 
 	col4.append(form_group_1);
 	col4.append(form_group_2);
@@ -439,21 +416,71 @@ function goToQuestion(questionNum) {
 	row.append(col4);
 	row.append(col8);
 
+	// APPEND FORM CONTENT
 	form.append(row);
 
-	// check for last question and add last step button
-	if (questionNum != initial_data.project_questions) {
-		let next_btn = document.createElement('div');
-		next_btn.classList.add('next-wrapper');
-		next_btn.innerHTML = '<div class="next-wrapper"><button type="submit" class="btn btn-primary" id="btn_next_step' + (questionNum) + '" onclick="goToQuestion(' + (questionNum + 1) + '); saveQuestion('+ questionNum +')">Next step</button></div>';
+		// check for last question and add last step button
+		if (questionNum != initial_data.project_questions) {
+			let next_btn = document.createElement('div');
+			next_btn.classList.add('next-wrapper');
+			next_btn.innerHTML = '<div class="next-wrapper"><button type="submit" class="btn btn-primary" id="btn_next_step' + (questionNum) + '" onclick="goToQuestion(' + (questionNum + 1) + ')">Next step</button></div>';
+	
+			form.append(next_btn);
+		} else {
+			let finish_btn = document.createElement('div');
+			finish_btn.classList.add('next-wrapper');
+			finish_btn.innerHTML = '<div class="next-wrapper"><button type="submit" class="btn btn-primary" id="finish_btn" onclick="finish(); previewForm()">Preview and save</button></div>';
+	
+			form.append(finish_btn);
+		}
 
-		form.append(next_btn);
-	} else {
-		let finish_btn = document.createElement('div');
-		finish_btn.classList.add('next-wrapper');
-		finish_btn.innerHTML = '<div class="next-wrapper"><button type="submit" class="btn btn-primary" id="finish_btn" onclick="finish(); saveQuestion('+ questionNum +'); previewForm()">Preview and save</button></div>';
+	if (questionNum == 1) {
+		if (form_basic_details.checkValidity() === false) {
+	    event.preventDefault();
+			event.stopPropagation();
+			//reload form
+			form.innerHTML = '';
+	  } else {
+	  	form.classList.remove('hide');
+	  	let form_basic_details = document.getElementById('form_basic_details');
+			form_basic_details.classList.add('hide');
 
-		form.append(finish_btn);
+			let question_tab = document.getElementById('tab_question_' + questionNum);
+			let tab_basic_details = document.getElementById('tab_basic_details');
+
+			tab_basic_details.classList.remove('active');
+			tab_basic_details.classList.add('disabled');
+			question_tab.classList.remove('disabled');
+			question_tab.classList.add('active');
+			saveBasicDetails();
+		}
+		form_basic_details.classList.add('was-validated');
+	}
+
+	if(questionNum > 1) {
+		let actual_question = questionNum - 1;
+		let actual_form = document.getElementById('question_form_' + actual_question.toString());
+
+		if (actual_form.checkValidity() === false) {
+			event.preventDefault();
+			event.stopPropagation();
+			//reload form
+			form.innerHTML = '';
+		} else {
+			saveQuestion(questionNum - 1);
+			form.classList.remove('hide');
+			let question_tab = document.getElementById('tab_question_' + questionNum);
+			let question_tab_last = document.getElementById('tab_question_' + (questionNum - 1));
+			question_tab_last.classList.remove('active');
+			question_tab_last.classList.add('disabled');
+			question_tab.classList.remove('disabled');
+			question_tab.classList.add('active');
+
+			let form_last = document.getElementById('question_form_' + (questionNum - 1));
+			form_last.classList.add('hide');
+			form_last.classList.remove('show');
+		}
+		actual_form.classList.add('was-validated');
 	}
 }
 
@@ -577,14 +604,21 @@ function previewForm() {
 
 function finish() {
 	let last_question_form = document.getElementById('question_form_' + initial_data.project_questions);
-	last_question_form.classList.add('hide');
-
-	let question_tab = document.getElementById('tab_question_' + initial_data.project_questions);
-	question_tab.classList.add('disabled');
-	question_tab.classList.remove('active');
-
-	let preview = document.getElementById('preview');
-	preview.classList.remove('hide');
+		if (last_question_form.checkValidity() === false) {
+			event.preventDefault();
+			event.stopPropagation();
+		} else {
+			saveQuestion(initial_data.project_questions);
+			last_question_form.classList.add('hide');
+		
+			let question_tab = document.getElementById('tab_question_' + initial_data.project_questions);
+			question_tab.classList.add('disabled');
+			question_tab.classList.remove('active');
+		
+			let preview = document.getElementById('preview');
+			preview.classList.remove('hide');
+		}
+		last_question_form.classList.add('was-validated');
 }
 
 
