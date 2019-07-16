@@ -631,13 +631,13 @@ function updateDTMFStatus(event, dtmf_num, question) {
 
 	let form_container = document.createElement('div');
 	form_container.classList.add('hide');
-	form_container.innerHTML = '<div class="form-group"><input type="text" id="dtmf_text_'+ question +'_' + dtmf_num + '" class="form-control"></div>'
+	form_container.innerHTML = '<div class="form-group"><input type="text" id="dtmf_text_'+ question +'_' + dtmf_num + '" class="form-control" required><div class="invalid-feedback">Required field.</div></div>'
 	
 	el.parentNode.parentNode.parentNode.parentNode.append(form_container);
 
 	// if this is not the last question OR skip logic is on, include select in dtmfs
 	if (question != initial_data.project_questions && initial_data.is_linear == true) {
-		form_container.innerHTML += '<div class="form-group"><select name="" id="dtmf_select_'+ question +'_' + dtmf_num + '" class="form-control"></select></div>';
+		form_container.innerHTML += '<div class="form-group"><select name="" id="dtmf_select_'+ question +'_' + dtmf_num + '" class="form-control" required></select><div class="invalid-feedback">Required field.</div></div>';
 
 		let dtmf_select = document.getElementById('dtmf_select_'+ question +'_' + dtmf_num);
 
