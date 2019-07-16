@@ -429,7 +429,7 @@ function goToQuestion(questionNum) {
 		} else {
 			let finish_btn = document.createElement('div');
 			finish_btn.classList.add('next-wrapper');
-			finish_btn.innerHTML = '<div class="next-wrapper"><button type="submit" class="btn btn-primary" id="finish_btn" onclick="finish(); previewForm()">Preview and save</button></div>';
+			finish_btn.innerHTML = '<div class="next-wrapper"><button type="submit" class="btn btn-primary" id="finish_btn" onclick="finish()">Preview and save</button></div>';
 	
 			form.append(finish_btn);
 		}
@@ -609,6 +609,7 @@ function finish() {
 			event.stopPropagation();
 		} else {
 			saveQuestion(initial_data.project_questions);
+			previewForm();
 			last_question_form.classList.add('hide');
 		
 			let question_tab = document.getElementById('tab_question_' + initial_data.project_questions);
