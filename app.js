@@ -58,7 +58,7 @@ function questionsCount(operation) {
 	let num_questions = parseInt(document.getElementById('num_questions').value);
 	if (operation == 'sum') {
 		num_questions += 1;
-	} else if (operation == 'substract' && num_questions > 1) {
+	} else if (operation == 'substract' && num_questions > 0) {
 		num_questions -= 1;
 	}
 	document.getElementById('num_questions').value = num_questions;
@@ -365,6 +365,25 @@ function saveBasicDetails() {
 
 function goToQuestion(questionNum) {
 
+	if (initial_data.project_questions == 0) {
+		if (form_basic_details.checkValidity() === false) {
+	    event.preventDefault();
+			event.stopPropagation();
+	  } else {
+			let form_basic_details = document.getElementById('form_basic_details');
+			form_basic_details.classList.add('hide');
+			let tab_basic_details = document.getElementById('tab_basic_details');
+	
+			tab_basic_details.classList.remove('active');
+			tab_basic_details.classList.add('disabled');
+			saveBasicDetails();
+			finish();
+			return;
+		}
+		form_basic_details.classList.add('was-validated');
+
+	}
+
 	// CREATE THE FORM AND CONTENT
 	let form = document.getElementById('question_form_' + questionNum);
 
@@ -574,8 +593,8 @@ function previewForm() {
 	prev_intro_audio_file.innerHTML = basic_details.intro_audio_original;
 	prev_hangup_audio_file.innerHTML = basic_details.hangup_audio_original;
 
-
-	let questions_table_body = document.getElementById('questions_table_body');
+if (initial_data.project_questions > 0) {
+		let questions_table_body = document.getElementById('questions_table_body');
 
 	for (let i=0; i < questions.length; i++) {
 		let tr = document.createElement('tr');
@@ -600,9 +619,18 @@ function previewForm() {
 	}
 }
 
+}
+
 
 
 function finish() {
+	if (initial_data.project_questions == 0) {
+		
+		previewForm();
+		let preview = document.getElementById('preview');
+		preview.classList.remove('hide');
+		return;
+	}
 	let last_question_form = document.getElementById('question_form_' + initial_data.project_questions);
 		if (last_question_form.checkValidity() === false) {
 			event.preventDefault();
