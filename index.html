@@ -202,9 +202,9 @@
 							</div>
 						</div>
 						<div class="col-sm-4">
-							<div class="form-group">
+							<div class="form-group" id="single_trunk_channels_cont">
 						    <label for="formControlRange" class="channels-label">Channels: <i onclick="updateChannelsValue('minus')" id="channelsMinus" class="fas fa-minus"></i><span id="channelsDisplay">1</span><i onclick="updateChannelsValue('plus')" id="channelsPlus" class="fas fa-plus"></i></label>
-						    <input type="range" class="form-control-range" id="channels" min="1" max="100" value="1" onchange="setChannels(event)">
+						    <input type="range" class="form-control-range" id="channels" min="1" max="100" value="1" onmousemove="setChannels(event)">
 							</div>
 							<div id="multi_channels"></div>
 						</div>
