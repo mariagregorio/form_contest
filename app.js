@@ -775,14 +775,19 @@ function trunkOptionToggle(event) {
 		'</label><input type="range" class="form-control-range" id="channels'+ parseInt(event.target.value) +'" min="1" max="100" value="1" '+
 		'onchange="updateTotalChannels()" onclick="setChannelsMulti(event, '+ parseInt(event.target.value) +'); updateTotalChannels();" onmousemove="setChannelsMulti(event, '+ parseInt(event.target.value) +')">'
 		multi_channels_cont.append(new_channels_slider_cont);
+
+		let channelsRangeInput = document.getElementById('channels' + parseInt(event.target.value));
+		channelsRangeInput.setAttribute('max', parseInt(event.target.value));
+		channelsRangeInput.value = parseInt(event.target.value);
+		document.getElementById('channelsDisplay_'+ parseInt(event.target.value)).innerText = event.target.value;
+		updateTotalChannels();
 	}
 }
 
 function setChannelsMulti(event, trunkid) {
 	let channelsRangeInput = document.getElementById('channels' + trunkid);
-	channelsRangeInput.setAttribute('max', trunkid);
 	channelsRangeInput.trunkid = trunkid;
-	document.getElementById('channelsDisplay_' + trunkid).innerText = trunkid;
+
 	document.getElementById('channelsDisplay_'+ trunkid).innerText = event.target.value;
 }
 
