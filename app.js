@@ -98,6 +98,8 @@ function updateChannels(event) {
 	channelsRangeInput.setAttribute('max', value);
 	channelsRangeInput.value = value;
 	document.getElementById('channelsDisplay').innerText = value;
+
+	initial_data.trunk_id = value;
 }
 
 function setChannels(event) {
@@ -412,7 +414,7 @@ function goToQuestion(questionNum) {
 
 	form_group_1.innerHTML = '<div class="form-group"><label for="question_audio">Question audio</label><select id="question_audio'+ questionNum +'" class="form-control" required><option disabled selected></option>'+ audio_options_list_HTML + '</select><div class="invalid-feedback">Required field.</div></div>';
 	form_group_2.innerHTML = '<div class="form-group"><label for="question_prompt">Question prompt</label><input type="text" id="question_prompt'+ questionNum +'" class="form-control" required><div class="invalid-feedback">Required field.</div></div>';
-	form_group_3.innerHTML = '<div class="form-group"><label for="question_label">Question label</label><input type="text" id="question_label'+ questionNum +'" class="form-control" required><div class="invalid-feedback">Required field.</div></div>';
+	form_group_3.innerHTML = '<div class="form-group"><label for="question_label">Question label</label><input type="text" id="question_label'+ questionNum +'" class="form-control" onchange="validateQuestionLabel(event)" required><div class="invalid-feedback">Required field.<br/>Question label must be unique.</div></div>';
 
 	col4.append(form_group_1);
 	col4.append(form_group_2);
@@ -720,6 +722,8 @@ function trunkToggle() {
 			options[i].selected = false;
 		}
 
+		initial_data.trunk_id = 'Multiple';
+
 	} else {
 		trunkSelect.multiple = false;
 		trunkSelect.classList.remove('multi-select');
@@ -815,4 +819,21 @@ function updateTotalChannels() {
 		total_value += Number(el.innerText);
 	}
 	total_channels_display.innerText = total_value.toString();
+	initial_data.project_channels = total_value;
+}
+
+function validateQuestionLabel(event) {
+	let input = event.target;
+	let value = input.value;
+
+	// check all question labels and mark as invalid if the label is already in use
+	if (questions.length > 0) {
+		for (i=0; i < questions.length; i++) {
+			if (questions[i].question_label.toUpperCase() == value.toUpperCase()) {
+				input.setCustomValidity("Question label must be unique.");
+				return;
+			}
+		}
+		input.setCustomValidity("");
+	}
 }

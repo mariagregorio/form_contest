@@ -354,13 +354,13 @@ input[type=range]:focus::-ms-fill-upper {
 
 .custom-select.is-valid, 
 .form-control.is-valid, 
-.was-validated .custom-select:valid, 
-.was-validated .form-control:valid {
+.was-validated .custom-select:valid:not(.is-invalid), 
+.was-validated .form-control:valid:not(.is-invalid) {
   border-color: #cfd8dc;
 }
-.custom-select.is-valid:focus,
+.custom-select.is-valid:focus:not(.is-invalid),
 .was-validated .custom-select:valid:focus,
-.form-control.is-valid:focus, 
+.form-control.is-valid:focus:not(.is-invalid), 
 .was-validated .form-control:valid:focus {
 	border-color: #b0bec5;
 }
